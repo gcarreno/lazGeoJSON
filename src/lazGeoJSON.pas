@@ -32,7 +32,9 @@ uses
 
 type
 { TGeoJSONType }
-  TGeoJSONType = (gjtNone, gjtPoint);
+  TGeoJSONType = (gjtNone, gjtPoint, gjtMultiPoint, gjtLineString,
+                  gjtMultiLineString, gjtPolygon, gjtMultiPolygon,
+                  gjtGeometryCollection, gjtFeature, gjtFeatureCollection);
 
 { TGeoJSON }
   TGeoJSON = class (TObject)
@@ -41,6 +43,7 @@ type
     FGJType: TGeoJSONType;
   public
     constructor Create;
+
     property GJType: TGeoJSONType
       read FGJType
       write FGJType;
