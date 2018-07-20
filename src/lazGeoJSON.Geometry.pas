@@ -1,7 +1,7 @@
 {
   GeoJSON/Geometry Object
 
-  Copyright (c) 2017 Gustavo Carreno <guscarreno@gmail.com>
+  Copyright (c) 2018 Gustavo Carreno <guscarreno@gmail.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to
@@ -31,6 +31,13 @@ uses
   Classes, SysUtils, lazGeoJSON;
 
 type
+{ TGeoJSONGeometryPosition
+  TGeoJSONGeometryPosition = record
+    longitude: Double;
+    latitude: Double;
+    altitude: Double;
+  end;
+}
 { TGeoJSONGeometry }
   TGeoJSONGeometry = class (TGeoJSON)
   private
