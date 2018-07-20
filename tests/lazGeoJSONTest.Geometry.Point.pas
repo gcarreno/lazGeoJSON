@@ -33,8 +33,8 @@ uses
   lazGeoJSON.Geometry.Point;
 
 type
-{ TTestGeometryPoint }
-  TTestGeometryPoint= class(TTestCase)
+{ TTestGeoJSONGeometryPoint }
+  TTestGeoJSONGeometryPoint= class(TTestCase)
   private
     FGJPoint: TGeoJSONGeometryPoint;
   protected
@@ -45,8 +45,8 @@ type
 
 implementation
 
-{ TTestGeometryPoint }
-procedure TTestGeometryPoint.TestCreate;
+{ TTestGeoJSONGeometryPoint }
+procedure TTestGeoJSONGeometryPoint.TestCreate;
 begin
   FGJPoint:= TGeoJSONGeometryPoint.Create;
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGJPoint.GJType), Ord(gjtPoint));
@@ -54,6 +54,6 @@ begin
 end;
 
 initialization
-  RegisterTest(TTestGeometryPoint);
+  RegisterTest(TTestGeoJSONGeometryPoint);
 end.
 
