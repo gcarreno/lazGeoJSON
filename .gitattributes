@@ -31,6 +31,8 @@
 *.dll binary
 
 # Keep these files from archive/exports, mainly from production.
-.gitignore      export-ignore
-.gitattributes  export-ignore
-/tests          export-ignore
+.gitignore         export-ignore
+.gitattributes     export-ignore
+.travis.yml        export-ignore
+.travis.install.py export-ignore
+/tests             export-ignore
