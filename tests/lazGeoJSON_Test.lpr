@@ -27,7 +27,9 @@ program lazGeoJSON_Test;
 
 uses
   Classes, consoletestrunner,
-  lazGeoJSONTest.GeoJSON;
+  lazGeoJSONTest.GeoJSON,
+  lazGeoJSONTest.Geometry,
+  lazGeoJSONTest.Geometry.Point;
 
 type
 

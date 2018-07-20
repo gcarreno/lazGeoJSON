@@ -50,6 +50,7 @@ procedure TTestGeoJSON.TestCreate;
 begin
   FGeoJSON:= TGeoJSON.Create;
   AssertEquals('GeoJSON Object type gjtNone', Ord(FGeoJSON.GJType), Ord(gjtNone));
+  FGeoJSON.Free;
 end;
 
 initialization

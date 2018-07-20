@@ -24,19 +24,35 @@
         <PackageName Value="FCL"/>
       </Item1>
     </RequiredPackages>
-    <Units Count="3">
+    <Units Count="7">
       <Unit0>
         <Filename Value="lazGeoJSON_Test.lpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="../src/lazGeoJSON.pas"/>
+        <Filename Value="lazGeoJSONTest.GeoJSON.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="lazGeoJSONTest.GeoJSON.pas"/>
+        <Filename Value="lazGeoJSONTest.Geometry.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
+      <Unit3>
+        <Filename Value="lazGeoJSONTest.Geometry.Point.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="../src/lazGeoJSON.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="../src/lazGeoJSON.Geometry.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="../src/lazGeoJSON.Geometry.Point.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit6>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

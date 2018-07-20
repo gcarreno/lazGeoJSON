@@ -1,5 +1,5 @@
 {
-  GeoJSON Object
+  GeoJSON/Geometry Object
 
   Copyright (c) 2017 Gustavo Carreno <guscarreno@gmail.com>
 
@@ -21,37 +21,32 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 }
-unit lazGeoJSON;
+unit lazGeoJSON.Geometry;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, lazGeoJSON;
 
 type
-{ TGeoJSONType }
-  TGeoJSONType = (gjtNone, gjtPoint);
-
-{ TGeoJSON }
-  TGeoJSON = class (TObject)
+{ TGeoJSONGeometry }
+  TGeoJSONGeometry = class (TGeoJSON)
   private
   protected
-    FGJType: TGeoJSONType;
+    //FCoordinates: Array
   public
     constructor Create;
-    property GJType: TGeoJSONType
-      read FGJType
-      write FGJType;
   end;
 
 implementation
 
-{ TGeoJSON }
-constructor TGeoJSON.Create;
+{ TGeoJSONGeometry }
+
+constructor TGeoJSONGeometry.Create;
 begin
-  FGJType:= gjtNone;
+  //
 end;
 
 end.

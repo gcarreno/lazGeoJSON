@@ -1,5 +1,5 @@
 {
-  GeoJSON Object
+  GeoJSON/Geometry Object Test
 
   Copyright (c) 2017 Gustavo Carreno <guscarreno@gmail.com>
 
@@ -21,38 +21,39 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 }
-unit lazGeoJSON;
+unit lazGeoJSONTest.Geometry;
 
 {$mode objfpc}{$H+}
 
 interface
 
 uses
-  Classes, SysUtils;
+  Classes, SysUtils, fpcunit, {testutils,} testregistry,
+  lazGeoJSON,
+  lazGeoJSON.Geometry;
 
 type
-{ TGeoJSONType }
-  TGeoJSONType = (gjtNone, gjtPoint);
-
-{ TGeoJSON }
-  TGeoJSON = class (TObject)
+{ TTestGeoJSONGeometry }
+  TTestGeoJSONGeometry = class(TTestCase)
   private
+    FGeoJSONGeometry: TGeoJSONGeometry;
   protected
-    FGJType: TGeoJSONType;
   public
-    constructor Create;
-    property GJType: TGeoJSONType
-      read FGJType
-      write FGJType;
+  published
+    procedure TestCreate;
   end;
 
 implementation
 
-{ TGeoJSON }
-constructor TGeoJSON.Create;
+{ TTestGeoJSONGeometry }
+procedure TTestGeoJSONGeometry.TestCreate;
 begin
-  FGJType:= gjtNone;
+  FGeoJSONGeometry:= TGeoJSONGeometry.Create;
+  AssertEquals('GeoJSON Object type gjtNone', Ord(FGeoJSONGeometry.GJType), Ord(gjtNone));
+  FGeoJSONGeometry.Free;
 end;
 
+initialization
+  RegisterTest(TTestGeoJSONGeometry);
 end.
 
