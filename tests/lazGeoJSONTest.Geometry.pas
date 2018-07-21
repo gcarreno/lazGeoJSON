@@ -37,20 +37,31 @@ type
   TTestGeoJSONGeometry = class(TTestCase)
   private
     FGeoJSONGeometry: TGeoJSONGeometry;
+    FGeoJSONGeometryPosition: TGeoJSONGeometryPosition;
   protected
   public
   published
-    procedure TestCreate;
+    procedure TestGeometryCreate;
+    procedure TestPositionCreate;
   end;
 
 implementation
 
 { TTestGeoJSONGeometry }
-procedure TTestGeoJSONGeometry.TestCreate;
+procedure TTestGeoJSONGeometry.TestGeometryCreate;
 begin
   FGeoJSONGeometry:= TGeoJSONGeometry.Create;
   AssertEquals('GeoJSON Object type gjtNone', Ord(FGeoJSONGeometry.GJType), Ord(gjtNone));
   FGeoJSONGeometry.Free;
+end;
+
+procedure TTestGeoJSONGeometry.TestPositionCreate;
+begin
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create;
+  AssertEquals('Position Latitude is 0.0', FGeoJSONGeometryPosition.Latitude, 0.0);
+  AssertEquals('Position Longitude is 0.0', FGeoJSONGeometryPosition.Longitude, 0.0);
+  AssertEquals('Position Altitude is 0.0', FGeoJSONGeometryPosition.Altitude, 0.0);
+  FGeoJSONGeometryPosition.Free;
 end;
 
 initialization

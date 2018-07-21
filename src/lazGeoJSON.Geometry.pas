@@ -31,29 +31,42 @@ uses
   Classes, SysUtils, lazGeoJSON;
 
 type
-{ TGeoJSONGeometryPosition
-  TGeoJSONGeometryPosition = record
-    longitude: Double;
-    latitude: Double;
-    altitude: Double;
+{ TGeoJSONGeometryPosition }
+  TGeoJSONGeometryPosition = class(TObject)
+  private
+    FLongitude: Double;
+    FLatitude: Double;
+    FAltitude: Double;
+  protected
+  public
+    constructor Create;
+
+    property Longitude: Double
+      read FLongitude
+      write FLongitude;
+    property Latitude: Double
+      read FLatitude
+      write FLatitude;
+    property Altitude: Double
+      read FAltitude
+      write FAltitude;
   end;
-}
+
 { TGeoJSONGeometry }
   TGeoJSONGeometry = class (TGeoJSON)
   private
   protected
-    //FCoordinates: Array
   public
-    constructor Create;
   end;
 
 implementation
 
-{ TGeoJSONGeometry }
-
-constructor TGeoJSONGeometry.Create;
+{ TGeoJSONGeometryPosition }
+constructor TGeoJSONGeometryPosition.Create;
 begin
-  //
+  FLongitude:= 0.0;
+  FLatitude:= 0.0;
+  FAltitude:= 0.0;
 end;
 
 end.
