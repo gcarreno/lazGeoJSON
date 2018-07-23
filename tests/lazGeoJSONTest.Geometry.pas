@@ -61,6 +61,7 @@ begin
   AssertEquals('Position Latitude is 0.0', FGeoJSONGeometryPosition.Latitude, 0.0);
   AssertEquals('Position Longitude is 0.0', FGeoJSONGeometryPosition.Longitude, 0.0);
   AssertEquals('Position Altitude is 0.0', FGeoJSONGeometryPosition.Altitude, 0.0);
+  AssertEquals('Position Has Altitude is False', FGeoJSONGeometryPosition.HasAltitude, False);
   FGeoJSONGeometryPosition.Free;
 end;
 

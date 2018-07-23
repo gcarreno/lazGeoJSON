@@ -37,6 +37,7 @@ type
     FLongitude: Double;
     FLatitude: Double;
     FAltitude: Double;
+    FHasAltitude: Boolean;
   protected
   public
     constructor Create;
@@ -50,6 +51,8 @@ type
     property Altitude: Double
       read FAltitude
       write FAltitude;
+    property HasAltitude: Boolean
+      read FHasAltitude;
   end;
 
 { TGeoJSONGeometry }
@@ -67,6 +70,7 @@ begin
   FLongitude:= 0.0;
   FLatitude:= 0.0;
   FAltitude:= 0.0;
+  FHasAltitude:= False;
 end;
 
 end.
