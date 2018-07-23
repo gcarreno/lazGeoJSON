@@ -42,8 +42,8 @@ install:
   - ./.travis.install.py
 
 script:
-  - lazbuild $LAZ_OPT ./tests/lazGeoJSON_Test.lpi       # Build lazqbtest project
-  - $LAZ_ENV ./bin/lazGeoJSON_Test --all --progress --format=plain # Run lazqbtest testsuite
+  - lazbuild $LAZ_OPT ./tests/lazGeoJSON_Test.lpi       # Build lazGeoJSON_Test project
+  - $LAZ_ENV ./bin/lazGeoJSON_Test --all --progress --format=plain # Run lazGeoJSON_Test testsuite
 
 notifications:
   email:
