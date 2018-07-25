@@ -28,9 +28,15 @@ unit lazGeoJSON.Geometry;
 interface
 
 uses
-  Classes, SysUtils, lazGeoJSON;
+  Classes, SysUtils{, Contnrs}, fpjson, lazGeoJSON;
 
 type
+{ Exceptions }
+  EWrongJSONObject = class(Exception);
+  EWrongJSONObjectClass = class of EWrongJSONObject;
+  ENotEnoughItems = class(Exception);
+  ENotEnoughItemsClass = class of ENotEnoughItems;
+
 { TGeoJSONGeometryPosition }
   TGeoJSONGeometryPosition = class(TObject)
   private
@@ -38,9 +44,18 @@ type
     FLatitude: Double;
     FAltitude: Double;
     FHasAltitude: Boolean;
+
+    procedure DoLoadFromJSON(const aJSON: String);
+    procedure DoLoadFromJSONData(const AJSONData: TJSONData);
+    procedure DoLoadFromJSONArray(const aJSONArray: TJSONArray);
+    procedure DoLoadFromStream(const AStream: TStream);
   protected
   public
     constructor Create;
+    constructor Create(aJSON: String);
+    constructor Create(aJSONData: TJSONData);
+    constructor Create(aJSONArray: TJSONArray);
+    constructor Create(aStream: TStream);
 
     property Longitude: Double
       read FLongitude
@@ -65,12 +80,57 @@ type
 implementation
 
 { TGeoJSONGeometryPosition }
+procedure TGeoJSONGeometryPosition.DoLoadFromJSON(const aJSON: String);
+begin
+
+end;
+
+procedure TGeoJSONGeometryPosition.DoLoadFromJSONData(const AJSONData: TJSONData);
+begin
+
+end;
+
+procedure TGeoJSONGeometryPosition.DoLoadFromJSONArray(const aJSONArray: TJSONArray);
+begin
+  if aJSONArray.Count < 2 then
+    raise ENotEnoughItems.CreateFmt('Not enough items (need 2 min): "%s"', [aJSONArray.AsJSON]);
+end;
+
+procedure TGeoJSONGeometryPosition.DoLoadFromStream(const AStream: TStream);
+begin
+
+end;
+
 constructor TGeoJSONGeometryPosition.Create;
 begin
   FLongitude:= 0.0;
   FLatitude:= 0.0;
   FAltitude:= 0.0;
   FHasAltitude:= False;
+end;
+
+constructor TGeoJSONGeometryPosition.Create(aJSON: String);
+begin
+  Create;
+  DoLoadFromJSON(aJSON);
+end;
+
+constructor TGeoJSONGeometryPosition.Create(aJSONData: TJSONData);
+begin
+  Create;
+  DoLoadFromJSONData(AJSONData);
+end;
+
+constructor TGeoJSONGeometryPosition.Create(aJSONArray: TJSONArray);
+begin
+  Create;
+  DoLoadFromJSONArray(aJSONArray);
+end;
+
+constructor TGeoJSONGeometryPosition.Create(aStream: TStream);
+begin
+  Create;
+  DoLoadFromStream(aStream);
 end;
 
 end.

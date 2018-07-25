@@ -28,8 +28,9 @@ unit lazGeoJSONTest.Geometry;
 interface
 
 uses
-  Classes, SysUtils, fpcunit, {testutils,} testregistry,
+  Classes, SysUtils, fpcunit, {testutils,} testregistry, fpjson,
   lazGeoJSON,
+  lazGeoJSON.Utils,
   lazGeoJSON.Geometry;
 
 type
@@ -43,29 +44,29 @@ type
   published
     procedure TestGeometryCreate;
     procedure TestPositionCreate;
+    procedure TestPositionCreateJSONArray;
   end;
 
 implementation
 
 const
+  cJSONEmptyObject =            '{}';
+  cJSONEmptyObjectEmptyArray =  '{[]}';
+  cJSONEmptyArray =             '[]';
 // TGeoJSONGeometry
-  cGeometryEmptyObject = '{}';
-  cGeometryObjectNoPosition = '{"type": "Point"}';
-  cGeometryObjectI = '{"type": "Point", "coordinates": [100, 100]}';
-  cGeometryObjectD = '{"type": "Point", "coordinates": [100.0, 100.0]}';
+  cJSONGeometryObjectNoPosition = '{"type": "Point"}';
+  cJSONGeometryObjectI =          '{"type": "Point", "coordinates": [100, 100]}';
+  cJSONGeometryObjectD =          '{"type": "Point", "coordinates": [100.0, 100.0]}';
 
 // TGeoJSONGeometryPosition
-  cPositionEmptyObject =            '{}';
-  cPositionEmptyObjectEmptyArray =  '{[]}';
-  cPositionEmptyArray =             '[]';
-  cPositionArrayOneItemI =          '[100]';
-  cPositionArrayTwoItemsI =         '[100, 100]';
-  cPositionArrayThreeItemsI =       '[100, 100, 100]';
-  cPositionArrayFourItemsI =        '[100, 100, 100, 100]';
-  cPositionArrayOneItemR =          '[100.0]';
-  cPositionArrayTwoItemsR =         '[100.0, 100.0]';
-  cPositionArrayThreeItemsR =       '[100.0, 100.0, 100.0]';
-  cPositionArrayFourItemsR =        '[100.0, 100.0, 100.0, 100.0]';
+  cJSONPositionArrayOneItemI =    '[100]';
+  cJSONPositionArrayTwoItemsI =   '[100, 100]';
+  cJSONPositionArrayThreeItemsI = '[100, 100, 100]';
+  cJSONPositionArrayFourItemsI =  '[100, 100, 100, 100]';
+  cJSONPositionArrayOneItemR =    '[100.0]';
+  cJSONPositionArrayTwoItemsR =   '[100.0, 100.0]';
+  cJSONPositionArrayThreeItemsR = '[100.0, 100.0, 100.0]';
+  cJSONPositionArrayFourItemsR =  '[100.0, 100.0, 100.0, 100.0]';
 
 { TTestGeoJSONGeometry }
 procedure TTestGeoJSONGeometry.TestGeometryCreate;
@@ -78,11 +79,35 @@ end;
 procedure TTestGeoJSONGeometry.TestPositionCreate;
 begin
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create;
-  AssertEquals('Position Latitude is 0.0', FGeoJSONGeometryPosition.Latitude, 0.0);
-  AssertEquals('Position Longitude is 0.0', FGeoJSONGeometryPosition.Longitude, 0.0);
-  AssertEquals('Position Altitude is 0.0', FGeoJSONGeometryPosition.Altitude, 0.0);
-  AssertEquals('Position Has Altitude is False', FGeoJSONGeometryPosition.HasAltitude, False);
+  AssertEquals('Position Latitude is 0.0', 0.0, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is 0.0', 0.0, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 0.0', 0.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Has Altitude is False', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
+end;
+
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArray;
+var
+  jData: TJSONData;
+  jArray: TJSONArray;
+  gotException: Boolean;
+begin
+  jData:= GetJSONData(cJSONEmptyArray);
+  jArray:= TJSONArray(jData);
+  gotException:= False;
+  try
+    try
+      FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(jArray);
+    except
+      on e: ENotEnoughItems do
+      begin
+        gotException:= True;
+      end;
+    end;
+  finally
+    FGeoJSONGeometryPosition.Free;
+  end;
+  AssertEquals('Got Exception ENotEnoughItems', True, gotException);
 end;
 
 initialization
