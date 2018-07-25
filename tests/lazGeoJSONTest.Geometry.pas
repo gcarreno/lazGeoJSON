@@ -47,6 +47,26 @@ type
 
 implementation
 
+const
+// TGeoJSONGeometry
+  cGeometryEmptyObject = '{}';
+  cGeometryObjectNoPosition = '{"type": "Point"}';
+  cGeometryObjectI = '{"type": "Point", "coordinates": [100, 100]}';
+  cGeometryObjectD = '{"type": "Point", "coordinates": [100.0, 100.0]}';
+
+// TGeoJSONGeometryPosition
+  cPositionEmptyObject =            '{}';
+  cPositionEmptyObjectEmptyArray =  '{[]}';
+  cPositionEmptyArray =             '[]';
+  cPositionArrayOneItemI =          '[100]';
+  cPositionArrayTwoItemsI =         '[100, 100]';
+  cPositionArrayThreeItemsI =       '[100, 100, 100]';
+  cPositionArrayFourItemsI =        '[100, 100, 100, 100]';
+  cPositionArrayOneItemR =          '[100.0]';
+  cPositionArrayTwoItemsR =         '[100.0, 100.0]';
+  cPositionArrayThreeItemsR =       '[100.0, 100.0, 100.0]';
+  cPositionArrayFourItemsR =        '[100.0, 100.0, 100.0, 100.0]';
+
 { TTestGeoJSONGeometry }
 procedure TTestGeoJSONGeometry.TestGeometryCreate;
 begin
