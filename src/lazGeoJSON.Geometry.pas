@@ -28,7 +28,9 @@ unit lazGeoJSON.Geometry;
 interface
 
 uses
-  Classes, SysUtils{, Contnrs}, fpjson, lazGeoJSON;
+  Classes, SysUtils{, Contnrs}, fpjson,
+  lazGeoJSON,
+  lazGeoJSON.Utils;
 
 type
 { Exceptions }
@@ -79,14 +81,21 @@ implementation
 
 { TGeoJSONGeometryPosition }
 procedure TGeoJSONGeometryPosition.DoLoadFromJSON(const aJSON: String);
+var
+  jData: TJSONData;
 begin
-
+  jData:= GetJSONData(aJSON);
+  try
+    DoLoadFromJSONData(jData);
+  finally
+    jData.Free;
+  end;
 end;
 
 procedure TGeoJSONGeometryPosition.DoLoadFromJSONData(const aJSONData: TJSONData);
 begin
   if aJSONData.JSONType <> jtArray then
-    raise EWrongJSONObject.Create('JSON Data does not contain am Array.');
+    raise EWrongJSONObject.Create('JSON Data does not contain an Array.');
   DoLoadFromJSONArray(aJSONData as TJSONArray);
 end;
 
