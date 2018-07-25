@@ -33,9 +33,7 @@ uses
 type
 { Exceptions }
   EWrongJSONObject = class(Exception);
-  EWrongJSONObjectClass = class of EWrongJSONObject;
   ENotEnoughItems = class(Exception);
-  ENotEnoughItemsClass = class of ENotEnoughItems;
 
 { TGeoJSONGeometryPosition }
   TGeoJSONGeometryPosition = class(TObject)
@@ -46,7 +44,7 @@ type
     FHasAltitude: Boolean;
 
     procedure DoLoadFromJSON(const aJSON: String);
-    procedure DoLoadFromJSONData(const AJSONData: TJSONData);
+    procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONArray(const aJSONArray: TJSONArray);
     procedure DoLoadFromStream(const AStream: TStream);
   protected
@@ -85,15 +83,17 @@ begin
 
 end;
 
-procedure TGeoJSONGeometryPosition.DoLoadFromJSONData(const AJSONData: TJSONData);
+procedure TGeoJSONGeometryPosition.DoLoadFromJSONData(const aJSONData: TJSONData);
 begin
-
+  if aJSONData.JSONType <> jtArray then
+    raise EWrongJSONObject.Create('JSON Data does not contain am Array.');
+  DoLoadFromJSONArray(aJSONData as TJSONArray);
 end;
 
 procedure TGeoJSONGeometryPosition.DoLoadFromJSONArray(const aJSONArray: TJSONArray);
 begin
   if aJSONArray.Count < 2 then
-    raise ENotEnoughItems.CreateFmt('Not enough items (need 2 min): "%s"', [aJSONArray.AsJSON]);
+    raise ENotEnoughItems.CreateFmt('Not enough items (need 2 min): "%s".', [aJSONArray.AsJSON]);
   FLatitude:= aJSONArray.Floats[0];
   FLongitude:= aJSONArray.Floats[1];
   if aJSONArray.Count > 2 then
