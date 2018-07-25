@@ -94,6 +94,13 @@ procedure TGeoJSONGeometryPosition.DoLoadFromJSONArray(const aJSONArray: TJSONAr
 begin
   if aJSONArray.Count < 2 then
     raise ENotEnoughItems.CreateFmt('Not enough items (need 2 min): "%s"', [aJSONArray.AsJSON]);
+  FLatitude:= aJSONArray.Floats[0];
+  FLongitude:= aJSONArray.Floats[1];
+  if aJSONArray.Count > 2 then
+  begin
+    FAltitude:= aJSONArray.Floats[2];
+    FHasAltitude:= True;
+  end;
 end;
 
 procedure TGeoJSONGeometryPosition.DoLoadFromStream(const AStream: TStream);
