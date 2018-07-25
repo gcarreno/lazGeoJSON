@@ -112,9 +112,16 @@ begin
   end;
 end;
 
-procedure TGeoJSONGeometryPosition.DoLoadFromStream(const AStream: TStream);
+procedure TGeoJSONGeometryPosition.DoLoadFromStream(const aStream: TStream);
+var
+  jData: TJSONData;
 begin
-
+  jData:= GetJSONData(aStream);
+  try
+    DoLoadFromJSONData(jData);
+  finally
+    jData.Free;
+  end;
 end;
 
 constructor TGeoJSONGeometryPosition.Create;
