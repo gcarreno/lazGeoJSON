@@ -44,7 +44,15 @@ type
   published
     procedure TestGeometryCreate;
     procedure TestPositionCreate;
-    procedure TestPositionCreateJSONArray;
+    procedure TestPositionCreateJSONArrayENotEnoughItemsEmptyArray;
+    procedure TestPositionCreateJSONArrayENotEnoughItemsOneItemI;
+    procedure TestPositionCreateJSONArrayENotEnoughItemsOneItemD;
+    procedure TestPositionCreateJSONArrayTwoItemsI;
+    procedure TestPositionCreateJSONArrayTwoItemsD;
+    procedure TestPositionCreateJSONArrayThreeItemsI;
+    procedure TestPositionCreateJSONArrayThreeItemsD;
+    procedure TestPositionCreateJSONArrayFourItemsI;
+    procedure TestPositionCreateJSONArrayFourItemsD;
   end;
 
 implementation
@@ -86,7 +94,7 @@ begin
   FGeoJSONGeometryPosition.Free;
 end;
 
-procedure TTestGeoJSONGeometry.TestPositionCreateJSONArray;
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayENotEnoughItemsEmptyArray;
 var
   jData: TJSONData;
   gotException: Boolean;
@@ -107,7 +115,13 @@ begin
   end;
   AssertEquals('Got Exception ENotEnoughItems on empty array', True, gotException);
   jData.Free;
+end;
 
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayENotEnoughItemsOneItemI;
+var
+  jData: TJSONData;
+  gotException: Boolean;
+begin
   jData:= GetJSONData(cJSONPositionArrayOneItemI);
   gotException:= False;
   try
@@ -124,7 +138,13 @@ begin
   end;
   AssertEquals('Got Exception ENotEnoughItems on one item I', True, gotException);
   jData.Free;
+end;
 
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayENotEnoughItemsOneItemD;
+var
+  jData: TJSONData;
+  gotException: Boolean;
+begin
   jData:= GetJSONData(cJSONPositionArrayOneItemD);
   gotException:= False;
   try
@@ -141,7 +161,12 @@ begin
   end;
   AssertEquals('Got Exception ENotEnoughItems on one item D', True, gotException);
   jData.Free;
+end;
 
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayTwoItemsI;
+var
+  jData: TJSONData;
+begin
   jData:= GetJSONData(cJSONPositionArrayTwoItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
   AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
@@ -150,7 +175,12 @@ begin
   AssertEquals('Position Has Altitude is False I', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
+end;
 
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayTwoItemsD;
+var
+  jData: TJSONData;
+begin
   jData:= GetJSONData(cJSONPositionArrayTwoItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
   AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
@@ -159,7 +189,12 @@ begin
   AssertEquals('Position Has Altitude is False D', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
+end;
 
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayThreeItemsI;
+var
+  jData: TJSONData;
+begin
   jData:= GetJSONData(cJSONPositionArrayThreeItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
   AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
@@ -168,7 +203,12 @@ begin
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
+end;
 
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayThreeItemsD;
+var
+  jData: TJSONData;
+begin
   jData:= GetJSONData(cJSONPositionArrayThreeItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
   AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
@@ -177,7 +217,12 @@ begin
   AssertEquals('Position Has Altitude is True D', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
+end;
 
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayFourItemsI;
+var
+  jData: TJSONData;
+begin
   jData:= GetJSONData(cJSONPositionArrayFourItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
   AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
@@ -186,7 +231,12 @@ begin
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
+end;
 
+procedure TTestGeoJSONGeometry.TestPositionCreateJSONArrayFourItemsD;
+var
+  jData: TJSONData;
+begin
   jData:= GetJSONData(cJSONPositionArrayFourItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
   AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
