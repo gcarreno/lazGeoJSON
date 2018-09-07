@@ -128,29 +128,13 @@ begin
 end;
 
 function TGeoJSONGeometryPosition.GetJSON: String;
-var
-  jData: TJSONData;
 begin
-  if not FHasAltitude then
-  begin
-    jData:= TJSONArray.Create(
-      [
-        FLongitude,
-        FLatitude
-      ]
-    );
-  end
-  else
-  begin
-    jData:= TJSONArray.Create(
-      [
-        FLongitude,
-        FLatitude,
-        FAltitude
-      ]
-    );
-  end;
-  Result:= jData.AsJSON;
+  Result:= '[';
+  Result+= FloatToStr(FLatitude) + ', ';
+  Result+= FloatToStr(FLongitude);
+  if FHasAltitude then
+    Result+= ', '+FloatToStr(FAltitude);
+  Result+= ']';
 end;
 
 constructor TGeoJSONGeometryPosition.Create;

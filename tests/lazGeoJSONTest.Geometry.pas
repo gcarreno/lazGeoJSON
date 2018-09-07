@@ -101,26 +101,29 @@ const
   cJSONEmptyObject =            '{}';
   cJSONEmptyObjectEmptyArray =  '{[]}';
   cJSONEmptyArray =             '[]';
-// TGeoJSONGeometry
+
+  // Float and Integer Constants
+  cLatitudeI = 100;
+  cLongitudeI = -100;
+  cAltitudeI = 100;
+  cLatitudeD = 100.12;
+  cLongitudeD = -100.12;
+  cAltitudeD = 100.12;
+
+  // TGeoJSONGeometry
   cJSONGeometryObjectNoPosition = '{"type": "Point"}';
   cJSONGeometryObjectI =          '{"type": "Point", "coordinates": [100, 100]}';
-  cJSONGeometryObjectD =          '{"type": "Point", "coordinates": [100.0, 100.0]}';
+  cJSONGeometryObjectD =          '{"type": "Point", "coordinates": [100.12, 100.12]}';
 
 // TGeoJSONGeometryPosition
   cJSONPositionArrayOneItemI =    '[100]';
   cJSONPositionArrayTwoItemsI =   '[100, -100]';
   cJSONPositionArrayThreeItemsI = '[100, -100, 100]';
   cJSONPositionArrayFourItemsI =  '[100, -100, 100, 100]';
-  cJSONPositionArrayOneItemD =    '[100.1]';
-  cJSONPositionArrayTwoItemsD =   '[100.1, -100.1]';
-  cJSONPositionArrayThreeItemsD = '[100.1, -100.1, 100.1]';
-  cJSONPositionArrayFourItemsD =  '[100.1, -100.1, 100.1, 100.1]';
-  cLatitudeI = 100;
-  cLongitudeI = -100;
-  cAltitudeI = 100;
-  cLatitudeD = 100.1;
-  cLongitudeD = -100.1;
-  cAltitudeD = 100.1;
+  cJSONPositionArrayOneItemD =    '[100.12]';
+  cJSONPositionArrayTwoItemsD =   '[100.12, -100.12]';
+  cJSONPositionArrayThreeItemsD = '[100.12, -100.12, 100.12]';
+  cJSONPositionArrayFourItemsD =  '[100.12, -100.12, 100.12, 100.12]';
 
 { TTestGeoJSONGeometry }
 procedure TTestGeoJSONGeometry.TestGeometryCreate;
@@ -787,54 +790,42 @@ end;
 
 procedure TTestGeoJSONGeometry.TestPositionAsJSONI;
 var
-  s: TStringStream;
-  stest: String;
+  s: String;
 begin
-  s:= TStringStream.Create(cJSONPositionArrayTwoItemsI);
-  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  stest:= FGeoJSONGeometryPosition.asJSON;
-  AssertEquals('Position asJSON I', cJSONPositionArrayTwoItemsI, stest);
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayTwoItemsI);
+  s:= FGeoJSONGeometryPosition.asJSON;
+  AssertEquals('Position asJSON I', cJSONPositionArrayTwoItemsI, s);
   FGeoJSONGeometryPosition.Free;
-  s.Free;
 end;
 
 procedure TTestGeoJSONGeometry.TestPositionAsJSONAltitudeI;
 var
-  s: TStringStream;
-  stest: String;
+  s: String;
 begin
-  s:= TStringStream.Create(cJSONPositionArrayThreeItemsI);
-  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  stest:= FGeoJSONGeometryPosition.asJSON;
-  AssertEquals('Position asJSON Altitude I', cJSONPositionArrayTwoItemsI, stest);
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayThreeItemsI);
+  s:= FGeoJSONGeometryPosition.asJSON;
+  AssertEquals('Position asJSON Altitude I', cJSONPositionArrayThreeItemsI, s);
   FGeoJSONGeometryPosition.Free;
-  s.Free;
 end;
 
 procedure TTestGeoJSONGeometry.TestPositionAsJSOND;
 var
-  s: TStringStream;
-  stest: String;
+  s: String;
 begin
-  s:= TStringStream.Create(cJSONPositionArrayTwoItemsD);
-  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  stest:= FGeoJSONGeometryPosition.asJSON;
-  AssertEquals('Position asJSON D', cJSONPositionArrayTwoItemsD, stest);
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayTwoItemsD);
+  s:= FGeoJSONGeometryPosition.asJSON;
+  AssertEquals('Position asJSON D', cJSONPositionArrayTwoItemsD, s);
   FGeoJSONGeometryPosition.Free;
-  s.Free;
 end;
 
 procedure TTestGeoJSONGeometry.TestPositionAsJSONAltitudeD;
 var
-  s: TStringStream;
-  stest: String;
+  s: String;
 begin
-  s:= TStringStream.Create(cJSONPositionArrayThreeItemsD);
-  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  stest:= FGeoJSONGeometryPosition.asJSON;
-  AssertEquals('Position asJSON Altitude D', cJSONPositionArrayTwoItemsD, stest);
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayThreeItemsD);
+  s:= FGeoJSONGeometryPosition.asJSON;
+  AssertEquals('Position asJSON Altitude D', cJSONPositionArrayThreeItemsD, s);
   FGeoJSONGeometryPosition.Free;
-  s.Free;
 end;
 
 initialization
