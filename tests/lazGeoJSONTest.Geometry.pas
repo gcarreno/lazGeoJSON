@@ -88,6 +88,11 @@ type
     procedure TestPositionCreateStreamThreeItemsD;
     procedure TestPositionCreateStreamFourItemsI;
     procedure TestPositionCreateStreamFourItemsD;
+
+    procedure TestPositionAsJSONI;
+    procedure TestPositionAsJSONAltitudeI;
+    procedure TestPositionAsJSOND;
+    procedure TestPositionAsJSONAltitudeD;
   end;
 
 implementation
@@ -106,10 +111,10 @@ const
   cJSONPositionArrayTwoItemsI =   '[100, -100]';
   cJSONPositionArrayThreeItemsI = '[100, -100, 100]';
   cJSONPositionArrayFourItemsI =  '[100, -100, 100, 100]';
-  cJSONPositionArrayOneItemD =    '[100.0]';
-  cJSONPositionArrayTwoItemsD =   '[100.0, -100.0]';
-  cJSONPositionArrayThreeItemsD = '[100.0, -100.0, 100.0]';
-  cJSONPositionArrayFourItemsD =  '[100.0, -100.0, 100.0, 100.0]';
+  cJSONPositionArrayOneItemD =    '[100.1]';
+  cJSONPositionArrayTwoItemsD =   '[100.1, -100.1]';
+  cJSONPositionArrayThreeItemsD = '[100.1, -100.1, 100.1]';
+  cJSONPositionArrayFourItemsD =  '[100.1, -100.1, 100.1, 100.1]';
 
 { TTestGeoJSONGeometry }
 procedure TTestGeoJSONGeometry.TestGeometryCreate;
@@ -204,9 +209,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayTwoItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 0 I', 0.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 0 I', 0, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is False I', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -218,9 +223,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayTwoItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 0 D', 0.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 0.0 D', 0.0, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is False D', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -232,9 +237,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayThreeItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100 I', 100, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -246,9 +251,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayThreeItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 D', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True D', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -260,9 +265,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayFourItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100 I', 100, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -274,9 +279,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayFourItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(TJSONArray(jData));
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 D', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True D', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -380,9 +385,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayTwoItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(jData);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 0 I', 0.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 0 I', 0, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is False I', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -394,8 +399,8 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayTwoItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(jData);
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
   AssertEquals('Position Altitude is 0 D', 0.0, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is False D', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
@@ -408,9 +413,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayThreeItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(jData);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100 I', 100, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -422,9 +427,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayThreeItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(jData);
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 D', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True D', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -436,9 +441,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayFourItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(jData);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100 I', 100, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -450,9 +455,9 @@ var
 begin
   jData:= GetJSONData(cJSONPositionArrayFourItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(jData);
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 D', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True D', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   jData.Free;
@@ -541,9 +546,9 @@ end;
 procedure TTestGeoJSONGeometry.TestPositionCreateJSONTwoItemsI;
 begin
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayTwoItemsI);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 0 I', 0.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 0 I', 0, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is False I', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
 end;
@@ -551,9 +556,9 @@ end;
 procedure TTestGeoJSONGeometry.TestPositionCreateJSONTwoItemsD;
 begin
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayTwoItemsD);
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 0 D', 0.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 0.0 D', 0.0, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is False D', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
 end;
@@ -561,9 +566,9 @@ end;
 procedure TTestGeoJSONGeometry.TestPositionCreateJSONThreeItemsI;
 begin
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayThreeItemsI);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100 I', 100, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
 end;
@@ -571,9 +576,9 @@ end;
 procedure TTestGeoJSONGeometry.TestPositionCreateJSONThreeItemsD;
 begin
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayThreeItemsD);
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 D', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True D', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
 end;
@@ -581,9 +586,9 @@ end;
 procedure TTestGeoJSONGeometry.TestPositionCreateJSONFourItemsI;
 begin
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayFourItemsI);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100 I', 100, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
 end;
@@ -591,9 +596,9 @@ end;
 procedure TTestGeoJSONGeometry.TestPositionCreateJSONFourItemsD;
 begin
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(cJSONPositionArrayFourItemsD);
-  AssertEquals('Position Latitude is 100 D', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 D', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 D', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 D', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100.1 D', 100.1, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True D', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
 end;
@@ -696,9 +701,9 @@ var
 begin
   s:= TStringStream.Create(cJSONPositionArrayTwoItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 0 I', 0.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 0 I', 0, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is False I', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   s.Free;
@@ -710,9 +715,9 @@ var
 begin
   s:= TStringStream.Create(cJSONPositionArrayTwoItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 0 I', 0.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 I', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 I', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 0.0 I', 0.0, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is False I', False, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   s.Free;
@@ -724,9 +729,9 @@ var
 begin
   s:= TStringStream.Create(cJSONPositionArrayThreeItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100 I', 100, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   s.Free;
@@ -738,9 +743,9 @@ var
 begin
   s:= TStringStream.Create(cJSONPositionArrayThreeItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 I', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 I', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100.1 I', 100.1, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   s.Free;
@@ -752,9 +757,9 @@ var
 begin
   s:= TStringStream.Create(cJSONPositionArrayFourItemsI);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100 I', 100, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100 I', -100, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100 I', 100, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
   FGeoJSONGeometryPosition.Free;
   s.Free;
@@ -766,10 +771,62 @@ var
 begin
   s:= TStringStream.Create(cJSONPositionArrayFourItemsD);
   FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
-  AssertEquals('Position Latitude is 100 I', 100.0, FGeoJSONGeometryPosition.Latitude);
-  AssertEquals('Position Longitude is -100 I', -100.0, FGeoJSONGeometryPosition.Longitude);
-  AssertEquals('Position Altitude is 100 I', 100.0, FGeoJSONGeometryPosition.Altitude);
+  AssertEquals('Position Latitude is 100.1 I', 100.1, FGeoJSONGeometryPosition.Latitude);
+  AssertEquals('Position Longitude is -100.1 I', -100.1, FGeoJSONGeometryPosition.Longitude);
+  AssertEquals('Position Altitude is 100.1 I', 100.1, FGeoJSONGeometryPosition.Altitude);
   AssertEquals('Position Has Altitude is True I', True, FGeoJSONGeometryPosition.HasAltitude);
+  FGeoJSONGeometryPosition.Free;
+  s.Free;
+end;
+
+procedure TTestGeoJSONGeometry.TestPositionAsJSONI;
+var
+  s: TStringStream;
+  stest: String;
+begin
+  s:= TStringStream.Create(cJSONPositionArrayTwoItemsI);
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
+  stest:= FGeoJSONGeometryPosition.asJSON;
+  AssertEquals('Position asJSON I', cJSONPositionArrayTwoItemsI, stest);
+  FGeoJSONGeometryPosition.Free;
+  s.Free;
+end;
+
+procedure TTestGeoJSONGeometry.TestPositionAsJSONAltitudeI;
+var
+  s: TStringStream;
+  stest: String;
+begin
+  s:= TStringStream.Create(cJSONPositionArrayThreeItemsI);
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
+  stest:= FGeoJSONGeometryPosition.asJSON;
+  AssertEquals('Position asJSON Altitude I', cJSONPositionArrayTwoItemsI, stest);
+  FGeoJSONGeometryPosition.Free;
+  s.Free;
+end;
+
+procedure TTestGeoJSONGeometry.TestPositionAsJSOND;
+var
+  s: TStringStream;
+  stest: String;
+begin
+  s:= TStringStream.Create(cJSONPositionArrayTwoItemsD);
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
+  stest:= FGeoJSONGeometryPosition.asJSON;
+  AssertEquals('Position asJSON D', cJSONPositionArrayTwoItemsD, stest);
+  FGeoJSONGeometryPosition.Free;
+  s.Free;
+end;
+
+procedure TTestGeoJSONGeometry.TestPositionAsJSONAltitudeD;
+var
+  s: TStringStream;
+  stest: String;
+begin
+  s:= TStringStream.Create(cJSONPositionArrayThreeItemsD);
+  FGeoJSONGeometryPosition:= TGeoJSONGeometryPosition.Create(s);
+  stest:= FGeoJSONGeometryPosition.asJSON;
+  AssertEquals('Position asJSON Altitude D', cJSONPositionArrayTwoItemsD, stest);
   FGeoJSONGeometryPosition.Free;
   s.Free;
 end;

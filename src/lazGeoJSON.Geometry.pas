@@ -49,6 +49,7 @@ type
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONArray(const aJSONArray: TJSONArray);
     procedure DoLoadFromStream(const AStream: TStream);
+    function GetJSON: String;
   protected
   public
     constructor Create;
@@ -68,6 +69,8 @@ type
       write FAltitude;
     property HasAltitude: Boolean
       read FHasAltitude;
+    property asJSON: String
+      read GetJSON;
   end;
 
 { TGeoJSONGeometry }
@@ -112,7 +115,7 @@ begin
   end;
 end;
 
-procedure TGeoJSONGeometryPosition.DoLoadFromStream(const aStream: TStream);
+procedure TGeoJSONGeometryPosition.DoLoadFromStream(const AStream: TStream);
 var
   jData: TJSONData;
 begin
@@ -122,6 +125,32 @@ begin
   finally
     jData.Free;
   end;
+end;
+
+function TGeoJSONGeometryPosition.GetJSON: String;
+var
+  jData: TJSONData;
+begin
+  if not FHasAltitude then
+  begin
+    jData:= TJSONArray.Create(
+      [
+        FLongitude,
+        FLatitude
+      ]
+    );
+  end
+  else
+  begin
+    jData:= TJSONArray.Create(
+      [
+        FLongitude,
+        FLatitude,
+        FAltitude
+      ]
+    );
+  end;
+  Result:= jData.AsJSON;
 end;
 
 constructor TGeoJSONGeometryPosition.Create;
