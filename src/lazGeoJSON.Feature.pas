@@ -48,6 +48,7 @@ type
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONObject(const aJSONObject: TJSONObject);
+    function GetJSON: String;
   protected
   public
     constructor Create;
@@ -60,6 +61,8 @@ type
       read FProperties;
     property HasProperties: Boolean
       read FHasProperties;
+    property asJSON: String
+      read GetJSON;
   end;
 
 implementation
@@ -93,7 +96,7 @@ begin
     raise EFeatureWrongFormedObject.Create('Member type is not Feature');
   if aJSONObject.IndexOfName('geometry') = -1 then
     raise EFeatureWrongFormedObject.Create('Object does not contain member geometry');
-  FPoint:= TGeoJSONPoint.Create(aJSONObject.Objects['geometry']);
+  FPoint:= TGeoJSONPoint.Create(aJSONObject.Objects['geometry'].Clone);
   if aJSONObject.IndexOfName('properties') <> -1 then
   begin
     if aJSONObject.Items[aJSONObject.IndexOfName('properties')].JSONType = jtObject then
@@ -102,6 +105,15 @@ begin
       FHasProperties:= True;
     end;
   end;
+end;
+
+function TGeoJSONFeature.GetJSON: String;
+begin
+  Result:= '{"type": "Feature",';
+  Result+= ' "geometry": ' + FPoint.asJSON;
+  if Assigned(FProperties) then
+    Result+= ', "properties": ' + FProperties.FormatJSON(AsCompressedJSON);
+  Result+= '}';
 end;
 
 constructor TGeoJSONFeature.Create;

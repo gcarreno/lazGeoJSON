@@ -218,7 +218,7 @@ procedure TTestGeoJSONPoint.TestPointCreateJSONObject;
 var
   jData: TJSONData;
 begin
-  jData:= GetJSONData(cJSONPointObjectI);
+  jData:= GetJSONData(cJSONPointObject);
   FGeoJSONPoint:= TGeoJSONPoint.Create(jData as TJSONObject);
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
@@ -298,7 +298,7 @@ procedure TTestGeoJSONPoint.TestPointCreateStream;
 var
   s: TStringStream;
 begin
-  s:= TStringStream.Create(cJSONPointObjectI);
+  s:= TStringStream.Create(cJSONPointObject);
   FGeoJSONPoint:= TGeoJSONPoint.Create(s);
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
@@ -342,12 +342,12 @@ begin
   finally
     FGeoJSONPoint.Free;
   end;
-  AssertEquals('Got Exception EPointWrongFormedObject on empty object', True, gotException);
+  AssertEquals('Got Exception EPointWrongFormedObject on object missing member', True, gotException);
 end;
 
 procedure TTestGeoJSONPoint.TestPointCreateJSON;
 begin
-  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectI);
+  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObject);
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
 end;
@@ -356,7 +356,7 @@ procedure TTestGeoJSONPoint.TestPointCreateJSONData;
 var
   jData: TJSONData;
 begin
-  jData:= GetJSONData(cJSONPointObjectI);
+  jData:= GetJSONData(cJSONPointObject);
   FGeoJSONPoint:= TGeoJSONPoint.Create(jData);
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
@@ -365,8 +365,8 @@ end;
 
 procedure TTestGeoJSONPoint.TestPointAsJSON;
 begin
-  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectI);
-  AssertEquals('Point asJSON I', cJSONPointObjectI, FGeoJSONPoint.asJSON);
+  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObject);
+  AssertEquals('Point asJSON I', cJSONPointObject, FGeoJSONPoint.asJSON);
   FGeoJSONPoint.Free;
 end;
 

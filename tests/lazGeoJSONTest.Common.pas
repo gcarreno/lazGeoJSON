@@ -61,24 +61,36 @@ const
 // TGeoJSONPoint
   cJSONPointObjectNoPosition =
     '{"type": "Point"}';
-  cJSONPointObjectI =
+  cJSONPointObject =
     '{"type": "Point", "coordinates": [100, -100]}';
-  cJSONPointObjectAltitudeI =
-    '{"type": "Point", "coordinates": [100, -100, 100]}';
-  cJSONPointObjectD =
-    '{"type": "Point", "coordinates": [100.12, -100.12]}';
-  cJSONPointObjectAltitudeD =
-    '{"type": "Point", "coordinates": [100.12, -100.12, 100.12]}';
 
 // TGeoJSONFeature
   cJSONFeatureNoGeometry =
     '{"type": "Feature"}';
   cJSONFeatureProperties =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}, "properties": {"p1": "p1 value"}}';
-  cJSONFeatureI =
+    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}, "properties": {"p1":"p1 value","p2":"p2 value"}}';
+  cJSONFeature =
     '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}}';
-  cJSONFeatureAltitudeI =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100, 100]}}';
+  cJSONFeatureStationML =
+    '{'+
+    '    "type": "Feature",'+
+    '    "geometry": {'+
+    '        "type": "Point",'+
+    '        "coordinates": ['+
+    '            -2.883333,'+
+    '            54.066666'+
+    '        ]'+
+    '    },'+
+    '    "properties": {'+
+    '        "Id": "0440B",'+
+    '        "Name": "Morecambe",'+
+    '        "Country": "England",'+
+    '        "ContinuousHeightsAvailable": true,'+
+    '        "Footnote": null'+
+    '    }'+
+    '}';
+  cJSONFeatureStation =
+    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-2.883333, 54.066666]}, "properties": {"Id":"0440B","Name":"Morecambe","Country":"England","ContinuousHeightsAvailable":true,"Footnote":null}}';
 
 implementation
 
