@@ -85,6 +85,7 @@ implementation
 const
   cJSONEmptyObject =            '{}';
   cJSONEmptyArray =             '[]';
+
 // Float and Integer Constants
   cLatitudeI = 100;
   cLongitudeI = -100;
@@ -93,7 +94,7 @@ const
   cLongitudeD = -100.12;
   cAltitudeD = 100.12;
 
-  // TGeoJSONPoint
+// TGeoJSONPoint
   cJSONPointObjectNoPosition = '{"type": "Point"}';
   cJSONPointObjectI =          '{"type": "Point", "coordinates": [100, -100]}';
   cJSONPointObjectAltitudeI =  '{"type": "Point", "coordinates": [100, -100, 100]}';

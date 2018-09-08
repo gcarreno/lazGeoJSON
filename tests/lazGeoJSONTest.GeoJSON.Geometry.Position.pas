@@ -96,6 +96,7 @@ implementation
 const
   cJSONEmptyObject =            '{}';
   cJSONEmptyArray =             '[]';
+
 // Float and Integer Constants
   cLatitudeI = 100;
   cLongitudeI = -100;
