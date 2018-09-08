@@ -93,35 +93,8 @@ type
 
 implementation
 
-const
-  cJSONEmptyObject =            '{}';
-  cJSONEmptyArray =             '[]';
-
-// Float and Integer Constants
-  cLatitudeI = 100;
-  cLongitudeI = -100;
-  cAltitudeI = 100;
-  cLatitudeD = 100.12;
-  cLongitudeD = -100.12;
-  cAltitudeD = 100.12;
-
-// TGeoJSONPosition
-  cJSONPositionArrayOneItemI =
-    '[100]';
-  cJSONPositionArrayTwoItemsI =
-    '[100, -100]';
-  cJSONPositionArrayThreeItemsI =
-    '[100, -100, 100]';
-  cJSONPositionArrayFourItemsI =
-    '[100, -100, 100, 100]';
-  cJSONPositionArrayOneItemD =
-    '[100.12]';
-  cJSONPositionArrayTwoItemsD =
-    '[100.12, -100.12]';
-  cJSONPositionArrayThreeItemsD =
-    '[100.12, -100.12, 100.12]';
-  cJSONPositionArrayFourItemsD =
-    '[100.12, -100.12, 100.12, 100.12]';
+uses
+  lazGeoJSONTest.Common;
 
 { TTestGeoJSONPosition }
 

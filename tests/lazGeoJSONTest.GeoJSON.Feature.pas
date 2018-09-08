@@ -49,27 +49,8 @@ type
 
 implementation
 
-const
-  cJSONEmptyObject =            '{}';
-  cJSONEmptyArray =             '[]';
-
-// Float and Integer Constants
-  cLatitudeI = 100;
-  cLongitudeI = -100;
-  cAltitudeI = 100;
-  cLatitudeD = 100.12;
-  cLongitudeD = -100.12;
-  cAltitudeD = 100.12;
-
-// TGeoJSONFeature
-  cJSONFeatureNoGeometry =
-    '{"type": "Feature"}';
-  cJSONFeatureProperties =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100.12, -100.12]}, "properties": {"p1": "p1 value"}}';
-  cJSONFeatureI =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}}';
-  cJSONFeatureAltitudeI =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100, 100]}}';
+uses
+  lazGeoJSONTest.Common;
 
 { TTestGeoJSONFeature }
 
@@ -77,10 +58,6 @@ procedure TTestGeoJSONFeature.TestFeatureCreate;
 begin
   FGeoJSONFeature:= TGeoJSONFeature.Create;
   AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GJType));
-  AssertEquals('GeoJSON Object Point Latitude 0 I', 0, FGeoJSONFeature.Point.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Point Longitude 0 I', 0, FGeoJSONFeature.Point.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Point Altitude 0 I', 0, FGeoJSONFeature.Point.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Point HasAltitude False', False, FGeoJSONFeature.Point.Coordinates.HasAltitude);
   AssertEquals('GeoJSON Object HasProperties False', False, FGeoJSONFeature.HasProperties);
   FGeoJSONFeature.Free;
 end;
@@ -89,10 +66,6 @@ procedure TTestGeoJSONFeature.TestFeatureCreateJSONWithProperties;
 begin
   FGeoJSONFeature:= TGeoJSONFeature.Create(cJSONFeatureProperties);
   AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GJType));
-  AssertEquals('GeoJSON Object Point Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONFeature.Point.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Point Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONFeature.Point.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Point Altitude 0 I', 0, FGeoJSONFeature.Point.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Point HasAltitude False', False, FGeoJSONFeature.Point.Coordinates.HasAltitude);
   AssertEquals('GeoJSON Object HasProperties True', True, FGeoJSONFeature.HasProperties);
   FGeoJSONFeature.Free;
 end;

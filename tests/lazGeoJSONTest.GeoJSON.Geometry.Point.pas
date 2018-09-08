@@ -47,75 +47,35 @@ type
     procedure TestPointCreateJSONWrongObject;
     procedure TestPointCreateJSONWrongFormedObjectWithEmptyObject;
     procedure TestPointCreateJSONWrongFormedObjectWithMissingMember;
-    procedure TestPointCreateJSONI;
-    procedure TestPointCreateJSONAltituteI;
-    procedure TestPointCreateJSOND;
-    procedure TestPointCreateJSONAltituteD;
+    procedure TestPointCreateJSON;
 
     procedure TestPointCreateJSONDataWrongObject;
     procedure TestPointCreateJSONDataWrongFormedObjectWithEmptyObject;
     procedure TestPointCreateJSONDataWrongFormedObjectWithMissingMember;
-    procedure TestPointCreateJSONDataI;
-    procedure TestPointCreateJSONDataAltituteI;
-    procedure TestPointCreateJSONDataD;
-    procedure TestPointCreateJSONDataAltituteD;
+    procedure TestPointCreateJSONData;
 
     procedure TestPointCreateJSONObjectWrongFormedObjectWithEmptyObject;
     procedure TestPointCreateJSONObjectWrongFormedObjectWithMissingMember;
-    procedure TestPointCreateJSONObjectI;
-    procedure TestPointCreateJSONObjectAltituteI;
-    procedure TestPointCreateJSONObjectD;
-    procedure TestPointCreateJSONObjectAltituteD;
+    procedure TestPointCreateJSONObject;
 
     procedure TestPointCreateStreamWrongObject;
     procedure TestPointCreateStreamWrongFormedObjectWithEmptyObject;
     procedure TestPointCreateStreamWrongFormedObjectWithMissingMember;
-    procedure TestPointCreateStreamI;
-    procedure TestPointCreateStreamAltitudeI;
-    procedure TestPointCreateStreamD;
-    procedure TestPointCreateStreamAltitudeD;
+    procedure TestPointCreateStream;
 
-    procedure TestPointAsJSONI;
-    procedure TestPointAsJSONAltitudeI;
-    procedure TestPointAsJSOND;
-    procedure TestPointAsJSONAltitudeD;
+    procedure TestPointAsJSON;
   end;
 
 implementation
 
-const
-  cJSONEmptyObject =            '{}';
-  cJSONEmptyArray =             '[]';
-
-// Float and Integer Constants
-  cLatitudeI = 100;
-  cLongitudeI = -100;
-  cAltitudeI = 100;
-  cLatitudeD = 100.12;
-  cLongitudeD = -100.12;
-  cAltitudeD = 100.12;
-
-// TGeoJSONPoint
-  cJSONPointObjectNoPosition =
-    '{"type": "Point"}';
-  cJSONPointObjectI =
-    '{"type": "Point", "coordinates": [100, -100]}';
-  cJSONPointObjectAltitudeI =
-    '{"type": "Point", "coordinates": [100, -100, 100]}';
-  cJSONPointObjectD =
-    '{"type": "Point", "coordinates": [100.12, -100.12]}';
-  cJSONPointObjectAltitudeD =
-    '{"type": "Point", "coordinates": [100.12, -100.12, 100.12]}';
+uses
+  lazGeoJSONTest.Common;
 
 { TTestGeoJSONPoint }
 procedure TTestGeoJSONPoint.TestPointCreate;
 begin
   FGeoJSONPoint:= TGeoJSONPoint.Create;
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude 0 I', 0, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude 0 I', 0, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0 I', 0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
   FGeoJSONPoint.Free;
 end;
 
@@ -254,62 +214,13 @@ begin
   AssertEquals('Got Exception EPointWrongFormedObject on object missing member', True, gotException);
 end;
 
-procedure TTestGeoJSONPoint.TestPointCreateJSONObjectI;
+procedure TTestGeoJSONPoint.TestPointCreateJSONObject;
 var
   jData: TJSONData;
 begin
   jData:= GetJSONData(cJSONPointObjectI);
   FGeoJSONPoint:= TGeoJSONPoint.Create(jData as TJSONObject);
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+IntToStr(cLatitudeI)+' I', cLatitudeI, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+IntToStr(cLongitudeI)+' I', cLongitudeI, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0 I', 0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  jdata.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateJSONObjectAltituteI;
-var
-  jData: TJSONData;
-begin
-  jData:= GetJSONData(cJSONPointObjectAltitudeI);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(jData as TJSONObject);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+IntToStr(cLatitudeI)+' I', cLatitudeI, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+IntToStr(cLongitudeI)+' I', cLongitudeI, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude '+IntToStr(cAltitudeI)+' I', cAltitudeI, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute True', True, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  jdata.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateJSONObjectD;
-var
-  jData: TJSONData;
-begin
-  jData:= GetJSONData(cJSONPointObjectD);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(jData as TJSONObject);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0 D', 0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  jdata.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateJSONObjectAltituteD;
-var
-  jData: TJSONData;
-begin
-  jData:= GetJSONData(cJSONPointObjectAltitudeD);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(jData as TJSONObject);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude '+FloatToStr(cAltitudeD)+' D', cAltitudeD, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute True', True, FGeoJSONPoint.Coordinates.HasAltitude);
   FGeoJSONPoint.Free;
   jdata.Free;
 end;
@@ -383,62 +294,13 @@ begin
   AssertEquals('Got Exception EPointWrongFormedObject on object missing member', True, gotException);
 end;
 
-procedure TTestGeoJSONPoint.TestPointCreateStreamI;
+procedure TTestGeoJSONPoint.TestPointCreateStream;
 var
   s: TStringStream;
 begin
   s:= TStringStream.Create(cJSONPointObjectI);
   FGeoJSONPoint:= TGeoJSONPoint.Create(s);
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+IntToStr(cLatitudeI)+' I', cLatitudeI, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+IntToStr(cLongitudeI)+' I', cLongitudeI, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0 I', 0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  s.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateStreamAltitudeI;
-var
-  s: TStringStream;
-begin
-  s:= TStringStream.Create(cJSONPointObjectAltitudeI);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(s);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+IntToStr(cLatitudeI)+' I', cLatitudeI, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+IntToStr(cLongitudeI)+' I', cLongitudeI, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude '+IntToStr(cAltitudeI)+' I', cAltitudeI, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute True', True, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  s.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateStreamD;
-var
-  s: TStringStream;
-begin
-  s:= TStringStream.Create(cJSONPointObjectD);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(s);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0.0 I', 0.0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  s.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateStreamAltitudeD;
-var
-  s: TStringStream;
-begin
-  s:= TStringStream.Create(cJSONPointObjectAltitudeD);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(s);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude '+FloatToStr(cAltitudeD)+' D', cAltitudeD, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute True', True, FGeoJSONPoint.Coordinates.HasAltitude);
   FGeoJSONPoint.Free;
   s.Free;
 end;
@@ -483,135 +345,28 @@ begin
   AssertEquals('Got Exception EPointWrongFormedObject on empty object', True, gotException);
 end;
 
-procedure TTestGeoJSONPoint.TestPointCreateJSONI;
+procedure TTestGeoJSONPoint.TestPointCreateJSON;
 begin
   FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectI);
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+IntToStr(cLatitudeI)+' I', cLatitudeI, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+IntToStr(cLongitudeI)+' I', cLongitudeI, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0 I', 0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
   FGeoJSONPoint.Free;
 end;
 
-procedure TTestGeoJSONPoint.TestPointCreateJSONAltituteI;
-begin
-  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectAltitudeI);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+IntToStr(cLatitudeI)+' I', cLatitudeI, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+IntToStr(cLongitudeI)+' I', cLongitudeI, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude '+IntToStr(cAltitudeI)+' I', cAltitudeI, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute True', True, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateJSOND;
-begin
-  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectD);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0 D', 0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateJSONAltituteD;
-begin
-  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectAltitudeD);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude '+FloatToStr(cAltitudeD)+' D', cAltitudeD, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute True', True, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateJSONDataI;
+procedure TTestGeoJSONPoint.TestPointCreateJSONData;
 var
   jData: TJSONData;
 begin
   jData:= GetJSONData(cJSONPointObjectI);
   FGeoJSONPoint:= TGeoJSONPoint.Create(jData);
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+IntToStr(cLatitudeI)+' I', cLatitudeI, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+IntToStr(cLongitudeI)+' I', cLongitudeI, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0 I', 0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
   FGeoJSONPoint.Free;
   jdata.Free;
 end;
 
-procedure TTestGeoJSONPoint.TestPointCreateJSONDataAltituteI;
-var
-  jData: TJSONData;
-begin
-  jData:= GetJSONData(cJSONPointObjectAltitudeI);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(jData);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+IntToStr(cLatitudeI)+' I', cLatitudeI, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+IntToStr(cLongitudeI)+' I', cLongitudeI, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude '+IntToStr(cAltitudeI)+' I', cAltitudeI, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute True', True, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  jdata.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateJSONDataD;
-var
-  jData: TJSONData;
-begin
-  jData:= GetJSONData(cJSONPointObjectD);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(jData);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude 0 D', 0, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute False', False, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  jdata.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointCreateJSONDataAltituteD;
-var
-  jData: TJSONData;
-begin
-  jData:= GetJSONData(cJSONPointObjectAltitudeD);
-  FGeoJSONPoint:= TGeoJSONPoint.Create(jData);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
-  AssertEquals('GeoJSON Object Position Latitude '+FloatToStr(cLatitudeD)+' D', cLatitudeD, FGeoJSONPoint.Coordinates.Latitude);
-  AssertEquals('GeoJSON Object Position Longitude '+FloatToStr(cLongitudeD)+' D', cLongitudeD, FGeoJSONPoint.Coordinates.Longitude);
-  AssertEquals('GeoJSON Object Position Altitude '+FloatToStr(cAltitudeD)+' D', cAltitudeD, FGeoJSONPoint.Coordinates.Altitude);
-  AssertEquals('GeoJSON Object Position HasAltitute True', True, FGeoJSONPoint.Coordinates.HasAltitude);
-  FGeoJSONPoint.Free;
-  jdata.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointAsJSONI;
+procedure TTestGeoJSONPoint.TestPointAsJSON;
 begin
   FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectI);
   AssertEquals('Point asJSON I', cJSONPointObjectI, FGeoJSONPoint.asJSON);
-  FGeoJSONPoint.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointAsJSONAltitudeI;
-begin
-  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectAltitudeI);
-  AssertEquals('Point asJSON Altitude I', cJSONPointObjectAltitudeI, FGeoJSONPoint.asJSON);
-  FGeoJSONPoint.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointAsJSOND;
-begin
-  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectD);
-  AssertEquals('Point asJSON D', cJSONPointObjectD, FGeoJSONPoint.asJSON);
-  FGeoJSONPoint.Free;
-end;
-
-procedure TTestGeoJSONPoint.TestPointAsJSONAltitudeD;
-begin
-  FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectAltitudeD);
-  AssertEquals('Point asJSON Altitude D', cJSONPointObjectAltitudeD, FGeoJSONPoint.asJSON);
   FGeoJSONPoint.Free;
 end;
 
