@@ -106,14 +106,22 @@ const
   cAltitudeD = 100.12;
 
 // TGeoJSONPosition
-  cJSONPositionArrayOneItemI =    '[100]';
-  cJSONPositionArrayTwoItemsI =   '[100, -100]';
-  cJSONPositionArrayThreeItemsI = '[100, -100, 100]';
-  cJSONPositionArrayFourItemsI =  '[100, -100, 100, 100]';
-  cJSONPositionArrayOneItemD =    '[100.12]';
-  cJSONPositionArrayTwoItemsD =   '[100.12, -100.12]';
-  cJSONPositionArrayThreeItemsD = '[100.12, -100.12, 100.12]';
-  cJSONPositionArrayFourItemsD =  '[100.12, -100.12, 100.12, 100.12]';
+  cJSONPositionArrayOneItemI =
+    '[100]';
+  cJSONPositionArrayTwoItemsI =
+    '[100, -100]';
+  cJSONPositionArrayThreeItemsI =
+    '[100, -100, 100]';
+  cJSONPositionArrayFourItemsI =
+    '[100, -100, 100, 100]';
+  cJSONPositionArrayOneItemD =
+    '[100.12]';
+  cJSONPositionArrayTwoItemsD =
+    '[100.12, -100.12]';
+  cJSONPositionArrayThreeItemsD =
+    '[100.12, -100.12, 100.12]';
+  cJSONPositionArrayFourItemsD =
+    '[100.12, -100.12, 100.12, 100.12]';
 
 { TTestGeoJSONPosition }
 

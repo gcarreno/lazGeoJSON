@@ -1,5 +1,5 @@
 {
-  GeoJSON Tests
+  GeoJSON/Feature Object
 
   Copyright (c) 2018 Gustavo Carreno <guscarreno@gmail.com>
 
@@ -21,32 +21,50 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 }
-program lazGeoJSON_Test;
+unit lazGeoJSON.Feature;
 
 {$mode objfpc}{$H+}
 
+interface
+
 uses
-  Classes, consoletestrunner,
-  lazGeoJSONTest.GeoJSON,
-  lazGeoJSONTest.GeoJSON.Geometry.Position,
-  lazGeoJSONTest.GeoJSON.Geometry.Point,
-  lazGeoJSONTest.GeoJSON.Feature;
+  Classes, SysUtils, fpjson,
+  lazGeoJSON,
+  lazGeoJSON.Utils,
+  lazGeoJSON.Geometry.Point;
 
 type
+{ Exceptions }
+  EFeatureWrongObject = class(Exception);
 
-  { TMyTestRunner }
-
-  TMyTestRunner = class(TTestRunner)
+{ TGeoJSONFeature }
+  TGeoJSONFeature = class(TGeoJSON)
+  private
+    FPoint: TGeoJSONPoint;
   protected
-  // override the protected methods of TTestRunner to customize its behavior
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+    property Point: TGeoJSONPoint
+      read FPoint;
   end;
 
-var
-  Application: TMyTestRunner;
+implementation
 
+{ TGeoJSONFeature }
+
+constructor TGeoJSONFeature.Create;
 begin
-  Application := TMyTestRunner.Create(nil);
-  Application.Initialize;
-  Application.Run;
-  Application.Free;
+  FGJType:= gjtFeature;
+  FPoint:= TGeoJSONPoint.Create;
+end;
+
+destructor TGeoJSONFeature.Destroy;
+begin
+  if Assigned(FPoint) then
+    FPoint.Free;
+  inherited Destroy;
+end;
+
 end.

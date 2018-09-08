@@ -1,5 +1,5 @@
 {
-  GeoJSON/Geometry/Point
+  GeoJSON/Geometry/Point Object
 
   Copyright (c) 2018 Gustavo Carreno <guscarreno@gmail.com>
 

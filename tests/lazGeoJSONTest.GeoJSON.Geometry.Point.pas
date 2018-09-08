@@ -34,6 +34,7 @@ uses
   lazGeoJSON.Geometry.Point;
 
 type
+
 { TTestGeoJSONPoint }
   TTestGeoJSONPoint= class(TTestCase)
   private
@@ -95,11 +96,16 @@ const
   cAltitudeD = 100.12;
 
 // TGeoJSONPoint
-  cJSONPointObjectNoPosition = '{"type": "Point"}';
-  cJSONPointObjectI =          '{"type": "Point", "coordinates": [100, -100]}';
-  cJSONPointObjectAltitudeI =  '{"type": "Point", "coordinates": [100, -100, 100]}';
-  cJSONPointObjectD =          '{"type": "Point", "coordinates": [100.12, -100.12]}';
-  cJSONPointObjectAltitudeD =  '{"type": "Point", "coordinates": [100.12, -100.12, 100.12]}';
+  cJSONPointObjectNoPosition =
+    '{"type": "Point"}';
+  cJSONPointObjectI =
+    '{"type": "Point", "coordinates": [100, -100]}';
+  cJSONPointObjectAltitudeI =
+    '{"type": "Point", "coordinates": [100, -100, 100]}';
+  cJSONPointObjectD =
+    '{"type": "Point", "coordinates": [100.12, -100.12]}';
+  cJSONPointObjectAltitudeD =
+    '{"type": "Point", "coordinates": [100.12, -100.12, 100.12]}';
 
 { TTestGeoJSONPoint }
 procedure TTestGeoJSONPoint.TestPointCreate;
