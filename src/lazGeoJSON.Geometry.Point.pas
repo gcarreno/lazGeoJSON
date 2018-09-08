@@ -28,24 +28,92 @@ unit lazGeoJSON.Geometry.Point;
 interface
 
 uses
-  Classes, SysUtils, lazGeoJSON;
+  Classes, SysUtils, fpjson,
+  lazGeoJSON,
+  lazGeoJSON.Geometry.Position;
 
 type
-{ TGeoJSONGeometryPoint }
-  TGeoJSONGeometryPoint = class(TGeoJSON)
+{ Exceptions }
+  // Point
+  EPointWrongObject = class(Exception);
+  EpointWrongFormedObject = class(Exception);
+
+{ TGeoJSONPoint }
+  TGeoJSONPoint = class(TGeoJSON)
   private
+    FPosition: TGeoJSONPosition;
+
+    procedure DoLoadFromJSON(const aJSON: String);
+    procedure DoLoadFromJSONData(const aJSONData: TJSONData);
+    procedure DoLoadFromJSONObject(const aJSONObject: TJSONObject);
   protected
   public
     constructor Create;
+    constructor Create(const aJSON: String);
+    constructor Create(const aJSONData: TJSONData);
+    constructor Create(const aJSONObject: TJSONObject);
+    destructor Destroy; override;
+
+    property Position: TGeoJSONPosition
+      read FPosition;
   end;
 
 
 implementation
 
-{ TGeoJSONGeometryPoint }
-constructor TGeoJSONGeometryPoint.Create;
+{ TGeoJSONPoint }
+procedure TGeoJSONPoint.DoLoadFromJSON(const aJSON: String);
+var
+  jData: TJSONData;
+begin
+  jData:= GetJSON(aJSON);
+  try
+    DoLoadFromJSONData(jData)
+  finally
+    jData.Free;
+  end;
+end;
+
+procedure TGeoJSONPoint.DoLoadFromJSONData(const aJSONData: TJSONData);
+begin
+  if aJSONData.JSONType <> jtObject then
+    raise EPointWrongObject.Create('JSON Data does not contain an Object.');
+end;
+
+procedure TGeoJSONPoint.DoLoadFromJSONObject(const aJSONObject: TJSONObject);
+begin
+  //
+end;
+
+constructor TGeoJSONPoint.Create;
 begin
   FGJType:= gjtPoint;
+  FPosition:= TGeoJSONPosition.Create;
+end;
+
+constructor TGeoJSONPoint.Create(const aJSON: String);
+begin
+  Create;
+  DoLoadFromJSON(aJSON);
+end;
+
+constructor TGeoJSONPoint.Create(const aJSONData: TJSONData);
+begin
+  Create;
+  DoLoadFromJSONData(aJSONData);
+end;
+
+constructor TGeoJSONPoint.Create(const aJSONObject: TJSONObject);
+begin
+  Create;
+  DoLoadFromJSONObject(aJSONObject);
+end;
+
+destructor TGeoJSONPoint.Destroy;
+begin
+  inherited Destroy;
+  if Assigned(FPosition) then
+    FPosition.Free;
 end;
 
 end.

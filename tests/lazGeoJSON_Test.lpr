@@ -29,7 +29,8 @@ uses
   Classes, consoletestrunner,
   lazGeoJSONTest.GeoJSON,
   lazGeoJSONTest.Geometry,
-  lazGeoJSONTest.Geometry.Point;
+  lazGeoJSONTest.Geometry.Point,
+  lazGeoJSONTest.Geometry.Position;
 
 type
 
