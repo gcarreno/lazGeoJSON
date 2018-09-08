@@ -48,11 +48,15 @@ type
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONObject(const aJSONObject: TJSONObject);
+    procedure DoLoadFromStream(const aStream: TStream);
     function GetJSON: String;
   protected
   public
     constructor Create;
     constructor Create(const aJSON: String);
+    constructor Create(const aJSONData: TJSONData);
+    constructor Create(const aJSONObject: TJSONObject);
+    constructor Create(const aStream: TStream);
     destructor Destroy; override;
 
     property Point: TGeoJSONPoint
@@ -107,6 +111,15 @@ begin
   end;
 end;
 
+procedure TGeoJSONFeature.DoLoadFromStream(const aStream: TStream);
+var
+  jData: TJSONData;
+begin
+  jData:= GetJSONData(aStream);
+  DoLoadFromJSONData(jData);
+  jData.Free;
+end;
+
 function TGeoJSONFeature.GetJSON: String;
 begin
   Result:= '{"type": "Feature",';
@@ -128,6 +141,24 @@ constructor TGeoJSONFeature.Create(const aJSON: String);
 begin
   FGJType:= gjtFeature;
   DoLoadFromJSON(aJSON);
+end;
+
+constructor TGeoJSONFeature.Create(const aJSONData: TJSONData);
+begin
+  FGJType:= gjtFeature;
+  DoLoadFromJSONData(aJSONData);
+end;
+
+constructor TGeoJSONFeature.Create(const aJSONObject: TJSONObject);
+begin
+  FGJType:= gjtFeature;
+  DoLoadFromJSONObject(aJSONObject);
+end;
+
+constructor TGeoJSONFeature.Create(const aStream: TStream);
+begin
+  FGJType:= gjtFeature;
+  DoLoadFromStream(aStream);
 end;
 
 destructor TGeoJSONFeature.Destroy;

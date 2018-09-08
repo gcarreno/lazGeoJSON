@@ -50,6 +50,8 @@ type
     procedure TestFeatureCreateJSON;
     procedure TestFeatureCreateJSONWithProperties;
 
+    procedure TestFeatureCreateJSONDataWrongObject;
+
     procedure TestFeatureAsJSON;
   end;
 
@@ -145,10 +147,33 @@ begin
   FGeoJSONFeature.Free;
 end;
 
+procedure TTestGeoJSONFeature.TestFeatureCreateJSONDataWrongObject;
+var
+  gotException: Boolean;
+  jData: TJSONData;
+begin
+  gotException:= False;
+  jData:= GetJSONData(cJSONEmptyArray);
+  try
+    try
+      FGeoJSONFeature:= TGeoJSONFeature.Create(jData);
+    except
+      on e: EFeatureWrongObject do
+      begin
+        gotException:= True;
+      end;
+    end;
+  finally
+    FGeoJSONFeature.Free;
+  end;
+  jData.Free;
+  AssertEquals('Got Exception EFeatureWrongObject on empty array', True, gotException);
+end;
+
 procedure TTestGeoJSONFeature.TestFeatureAsJSON;
 begin
-  FGeoJSONFeature:= TGeoJSONFeature.Create(cJSONFeatureStationML);
-  AssertEquals('Feature asJSON', cJSONFeatureStation, FGeoJSONFeature.asJSON);
+  FGeoJSONFeature:= TGeoJSONFeature.Create(cJSONFeatureProperties);
+  AssertEquals('Feature asJSON', cJSONFeatureProperties, FGeoJSONFeature.asJSON);
   FGeoJSONFeature.Free;
 end;
 
