@@ -1,5 +1,5 @@
 {
-  GeoJSON/Geometry Object
+  GeoJSON/Utils
 
   Copyright (c) 2018 Gustavo Carreno <guscarreno@gmail.com>
 
