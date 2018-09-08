@@ -34,15 +34,15 @@
         <IsPartOfProject Value="True"/>
       </Unit1>
       <Unit2>
-        <Filename Value="lazGeoJSONTest.Geometry.pas"/>
+        <Filename Value="lazGeoJSONTest.GeoJSON.Geometry.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="lazGeoJSONTest.Geometry.Point.pas"/>
+        <Filename Value="lazGeoJSONTest.GeoJSON.Geometry.Point.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit3>
       <Unit4>
-        <Filename Value="lazGeoJSONTest.Geometry.Position.pas"/>
+        <Filename Value="lazGeoJSONTest.GeoJSON.Geometry.Position.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
       <Unit5>

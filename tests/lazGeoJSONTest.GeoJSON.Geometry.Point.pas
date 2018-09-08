@@ -36,7 +36,7 @@ type
 { TTestGeoJSONGeometryPoint }
   TTestGeoJSONGeometryPoint= class(TTestCase)
   private
-    FGJPoint: TGeoJSONPoint;
+    FGeoJSONPoint: TGeoJSONPoint;
   protected
   public
   published
@@ -48,9 +48,9 @@ implementation
 { TTestGeoJSONGeometryPoint }
 procedure TTestGeoJSONGeometryPoint.TestPointCreate;
 begin
-  FGJPoint:= TGeoJSONPoint.Create;
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGJPoint.GJType), Ord(gjtPoint));
-  FGJPoint.Free;
+  FGeoJSONPoint:= TGeoJSONPoint.Create;
+  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
+  FGeoJSONPoint.Free;
 end;
 
 initialization
