@@ -88,32 +88,14 @@ begin
 end;
 
 procedure TGeoJSONPoint.DoLoadFromJSONObject(const aJSONObject: TJSONObject);
-var
-  s: TJSONString;
-  jData: TJSONData;
 begin
-  if aJSONObject.Find('type', s) then
-  begin
-    if s.AsString = 'Point' then
-    begin
-      if aJSONObject.Find('coordinates', jData) then
-      begin
-        FCoordinates:= TGeoJSONPosition.Create(jData);
-      end
-      else
-      begin
-        raise EPointWrongFormedObject.Create('Object does not contain member coordinates');
-      end;
-    end
-    else
-    begin
-      raise EPointWrongFormedObject.Create('Member type is not Point.');
-    end;
-  end
-  else
-  begin
+  if aJSONObject.IndexOfName('type') = -1 then
     raise EPointWrongFormedObject.Create('Object does not contain member type.');
-  end;
+  if aJSONObject.Strings['type'] <> 'Point' then
+    raise EPointWrongFormedObject.Create('Member type is not Point.');
+  if aJSONObject.IndexOfName('coordinates') = -1 then
+    raise EPointWrongFormedObject.Create('Object does not contain member coordinates.');
+  FCoordinates:= TGeoJSONPosition.Create(aJSONObject.Arrays['coordinates']);
 end;
 
 procedure TGeoJSONPoint.DoLoadFromStream(const aStream: TStream);
@@ -167,9 +149,9 @@ end;
 
 destructor TGeoJSONPoint.Destroy;
 begin
-  inherited Destroy;
   if Assigned(FCoordinates) then
     FCoordinates.Free;
+  inherited Destroy;
 end;
 
 end.
