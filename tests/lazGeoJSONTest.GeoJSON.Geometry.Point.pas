@@ -34,8 +34,8 @@ uses
   lazGeoJSON.Geometry.Point;
 
 type
-{ TTestGeoJSONGeometryPoint }
-  TTestGeoJSONGeometryPoint= class(TTestCase)
+{ TTestGeoJSONPoint }
+  TTestGeoJSONPoint= class(TTestCase)
   private
     FGeoJSONPoint: TGeoJSONPoint;
   protected
@@ -45,13 +45,14 @@ type
 
     procedure TestPointCreateJSONWrongObject;
     procedure TestPointCreateJSONDataWrongObject;
+    procedure TestPointCreateJSONDataWrongFormedObjectWithEmptyObject;
+    procedure TestPointCreateJSONDataWrongFormedObjectWithMissingMember;
   end;
 
 implementation
 
 const
   cJSONEmptyObject =            '{}';
-  cJSONEmptyObjectEmptyArray =  '{[]}';
   cJSONEmptyArray =             '[]';
 
   // TGeoJSONPoint
@@ -59,8 +60,8 @@ const
   cJSONPointObjectI =          '{"type": "Point", "coordinates": [100, 100]}';
   cJSONPointObjectD =          '{"type": "Point", "coordinates": [100.12, 100.12]}';
 
-{ TTestGeoJSONGeometryPoint }
-procedure TTestGeoJSONGeometryPoint.TestPointCreate;
+{ TTestGeoJSONPoint }
+procedure TTestGeoJSONPoint.TestPointCreate;
 begin
   FGeoJSONPoint:= TGeoJSONPoint.Create;
   AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
@@ -71,7 +72,7 @@ begin
   FGeoJSONPoint.Free;
 end;
 
-procedure TTestGeoJSONGeometryPoint.TestPointCreateJSONWrongObject;
+procedure TTestGeoJSONPoint.TestPointCreateJSONWrongObject;
 var
   gotException: Boolean;
 begin
@@ -91,7 +92,7 @@ begin
   AssertEquals('Got Exception EPointWrongObject on empty array', True, gotException);
 end;
 
-procedure TTestGeoJSONGeometryPoint.TestPointCreateJSONDataWrongObject;
+procedure TTestGeoJSONPoint.TestPointCreateJSONDataWrongObject;
 var
   gotException: Boolean;
   jData: TJSONData;
@@ -111,10 +112,50 @@ begin
     FGeoJSONPoint.Free;
   end;
   jData.Free;
-  AssertEquals('Got Exception EGeometryWrongObject on empty array', True, gotException);
+  AssertEquals('Got Exception EPointWrongObject on empty array', True, gotException);
+end;
+
+procedure TTestGeoJSONPoint.TestPointCreateJSONDataWrongFormedObjectWithEmptyObject;
+var
+  gotException: Boolean;
+begin
+  gotException:= False;
+  try
+    try
+      FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONEmptyObject);
+    except
+      on e: EPointWrongFormedObject do
+      begin
+        gotException:= True;
+      end;
+    end;
+  finally
+    FGeoJSONPoint.Free;
+  end;
+  AssertEquals('Got Exception EPointWrongFormedObject on empty object', True, gotException);
+end;
+
+procedure TTestGeoJSONPoint.TestPointCreateJSONDataWrongFormedObjectWithMissingMember;
+var
+  gotException: Boolean;
+begin
+  gotException:= False;
+  try
+    try
+      FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObjectNoPosition);
+    except
+      on e: EPointWrongFormedObject do
+      begin
+        gotException:= True;
+      end;
+    end;
+  finally
+    FGeoJSONPoint.Free;
+  end;
+  AssertEquals('Got Exception EPointWrongFormedObject on empty object', True, gotException);
 end;
 
 initialization
-  RegisterTest(TTestGeoJSONGeometryPoint);
+  RegisterTest(TTestGeoJSONPoint);
 end.
 

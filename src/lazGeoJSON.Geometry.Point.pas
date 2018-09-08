@@ -36,7 +36,7 @@ type
 { Exceptions }
   // Point
   EPointWrongObject = class(Exception);
-  EpointWrongFormedObject = class(Exception);
+  EPointWrongFormedObject = class(Exception);
 
 { TGeoJSONPoint }
   TGeoJSONPoint = class(TGeoJSON)
@@ -78,11 +78,36 @@ procedure TGeoJSONPoint.DoLoadFromJSONData(const aJSONData: TJSONData);
 begin
   if aJSONData.JSONType <> jtObject then
     raise EPointWrongObject.Create('JSON Data does not contain an Object.');
+  DoLoadFromJSONObject(aJSONData as TJSONObject);
 end;
 
 procedure TGeoJSONPoint.DoLoadFromJSONObject(const aJSONObject: TJSONObject);
+var
+  s: TJSONString;
+  jData: TJSONData;
 begin
-  //
+  if aJSONObject.Find('type', s) then
+  begin
+    if s.AsString = 'Point' then
+    begin
+      if aJSONObject.Find('coordinates', jData) then
+      begin
+        FCoordinates:= TGeoJSONPosition.Create(jData);
+      end
+      else
+      begin
+        raise EPointWrongFormedObject.Create('Object does not contain member coordinates');
+      end;
+    end
+    else
+    begin
+      raise EPointWrongFormedObject.Create('Member type is not Point.');
+    end;
+  end
+  else
+  begin
+    raise EPointWrongFormedObject.Create('Object does not contain member type.');
+  end;
 end;
 
 constructor TGeoJSONPoint.Create;
@@ -93,19 +118,19 @@ end;
 
 constructor TGeoJSONPoint.Create(const aJSON: String);
 begin
-  Create;
+  FGJType:= gjtPoint;
   DoLoadFromJSON(aJSON);
 end;
 
 constructor TGeoJSONPoint.Create(const aJSONData: TJSONData);
 begin
-  Create;
+  FGJType:= gjtPoint;
   DoLoadFromJSONData(aJSONData);
 end;
 
 constructor TGeoJSONPoint.Create(const aJSONObject: TJSONObject);
 begin
-  Create;
+  FGJType:= gjtPoint;
   DoLoadFromJSONObject(aJSONObject);
 end;
 

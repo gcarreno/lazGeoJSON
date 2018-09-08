@@ -1,7 +1,6 @@
 # lazGeoJSON project specific
 /bin
 /Research
-/lazGeoJSON.cuda-proj
 
 # Compiled l10n files: .mo should be ignored
 *.mo

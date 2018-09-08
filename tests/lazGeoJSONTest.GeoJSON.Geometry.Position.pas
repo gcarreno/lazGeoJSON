@@ -29,9 +29,7 @@ interface
 
 uses
   Classes, SysUtils, fpcunit, {testutils,} testregistry, fpjson,
-  lazGeoJSON,
   lazGeoJSON.Utils,
-  lazGeoJSON.Geometry,
   lazGeoJSON.Geometry.Position;
 
 type
@@ -97,7 +95,6 @@ implementation
 
 const
   cJSONEmptyObject =            '{}';
-  cJSONEmptyObjectEmptyArray =  '{[]}';
   cJSONEmptyArray =             '[]';
 // Float and Integer Constants
   cLatitudeI = 100;
