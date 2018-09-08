@@ -30,6 +30,7 @@ interface
 uses
   Classes, SysUtils, fpjson,
   lazGeoJSON,
+  lazGeoJSON.Utils,
   lazGeoJSON.Geometry.Position;
 
 type
@@ -46,16 +47,21 @@ type
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONObject(const aJSONObject: TJSONObject);
+    procedure DoLoadFromStream(const aStream: TStream);
+    function GetJSON: String;
   protected
   public
     constructor Create;
     constructor Create(const aJSON: String);
     constructor Create(const aJSONData: TJSONData);
     constructor Create(const aJSONObject: TJSONObject);
+    constructor Create(const aStream: TStream);
     destructor Destroy; override;
 
     property Coordinates: TGeoJSONPosition
       read FCoordinates;
+    property asJSON: String
+      read GetJSON;
   end;
 
 
@@ -66,7 +72,7 @@ procedure TGeoJSONPoint.DoLoadFromJSON(const aJSON: String);
 var
   jData: TJSONData;
 begin
-  jData:= GetJSON(aJSON);
+  jData:= GetJSONData(aJSON);
   try
     DoLoadFromJSONData(jData)
   finally
@@ -110,6 +116,25 @@ begin
   end;
 end;
 
+procedure TGeoJSONPoint.DoLoadFromStream(const aStream: TStream);
+var
+  jData: TJSONData;
+begin
+  jData:= GetJSONData(aStream);
+  try
+    DoLoadFromJSONData(jData);
+  finally
+    jData.Free;
+  end;
+end;
+
+function TGeoJSONPoint.GetJSON: String;
+begin
+  Result:= '{"type": "Point", "coordinates": ';
+  Result+= FCoordinates.asJSON;
+  Result+= '}';
+end;
+
 constructor TGeoJSONPoint.Create;
 begin
   FGJType:= gjtPoint;
@@ -132,6 +157,12 @@ constructor TGeoJSONPoint.Create(const aJSONObject: TJSONObject);
 begin
   FGJType:= gjtPoint;
   DoLoadFromJSONObject(aJSONObject);
+end;
+
+constructor TGeoJSONPoint.Create(const aStream: TStream);
+begin
+  FGJType:= gjtPoint;
+  DoLoadFromStream(aStream);
 end;
 
 destructor TGeoJSONPoint.Destroy;
