@@ -21,7 +21,7 @@
   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 }
-unit lazGeoJSONTest.Geometry.Position;
+unit lazGeoJSONTest.GeoJSON.Geometry.Position;
 
 {$mode objfpc}{$H+}
 

@@ -41,7 +41,7 @@ type
 { TGeoJSONPoint }
   TGeoJSONPoint = class(TGeoJSON)
   private
-    FPosition: TGeoJSONPosition;
+    FCoordinates: TGeoJSONPosition;
 
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
@@ -54,8 +54,8 @@ type
     constructor Create(const aJSONObject: TJSONObject);
     destructor Destroy; override;
 
-    property Position: TGeoJSONPosition
-      read FPosition;
+    property Coordinates: TGeoJSONPosition
+      read FCoordinates;
   end;
 
 
@@ -88,7 +88,7 @@ end;
 constructor TGeoJSONPoint.Create;
 begin
   FGJType:= gjtPoint;
-  FPosition:= TGeoJSONPosition.Create;
+  FCoordinates:= TGeoJSONPosition.Create;
 end;
 
 constructor TGeoJSONPoint.Create(const aJSON: String);
@@ -112,8 +112,8 @@ end;
 destructor TGeoJSONPoint.Destroy;
 begin
   inherited Destroy;
-  if Assigned(FPosition) then
-    FPosition.Free;
+  if Assigned(FCoordinates) then
+    FCoordinates.Free;
 end;
 
 end.

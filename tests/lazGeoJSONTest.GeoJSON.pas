@@ -39,14 +39,14 @@ type
   protected
   public
   published
-    procedure TestCreate;
+    procedure TestGeoJSONCreate;
   end;
 
 implementation
 
 { TTestGeoJSON }
 
-procedure TTestGeoJSON.TestCreate;
+procedure TTestGeoJSON.TestGeoJSONCreate;
 begin
   FGeoJSON:= TGeoJSON.Create;
   AssertEquals('GeoJSON Object type gjtNone', Ord(FGeoJSON.GJType), Ord(gjtNone));
