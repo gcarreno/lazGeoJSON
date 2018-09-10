@@ -143,21 +143,32 @@ begin
 end;
 
 function TGeoJSONFeature.GetJSON: String;
+var
+  jFeature: TJSONObject;
 begin
-  Result:= '{"type": "Feature"';
-  if FID <> '' then
-    Result+= ', "id": "'+FID+'"';
-  case FGeometry.GeoJSONType of
-    gjtPoint: begin
-      Result+= ', "geometry": ' + TGeoJSONPoint(FGeometry).asJSON;
+  Result:= '';
+  jFeature:= TJSONObject.Create;
+  try
+    jFeature.Add('type', TJSONString.Create('Feature'));
+    if GetHasID then
+      jFeature.Add('id', TJSONString.Create(FID));
+    if Assigned(FGeometry) then
+    begin
+      case FGeometry.GeoJSONType of
+        gjtPoint: begin
+          jFeature.Add('geometry', GetJSONData(TGeoJSONPoint(FGeometry).asJSON).Clone);
+        end;
+        //gjtMultiPoint: begin
+        //  Result+= ', "geometry": ' + TGeoJSONMultiPoint(FGeometry).asJSON;
+        //end;
+      end;
     end;
-    //gjtMultiPoint: begin
-    //  Result+= ', "geometry": ' + TGeoJSONMultiPoint(FGeometry).asJSON;
-    //end;
+    if Assigned(FProperties) then
+      jFeature.Add('properties', FProperties.Clone);
+    Result:= jFeature.FormatJSON(AsCompressedJSON);
+  finally
+    jFeature.Free;
   end;
-  if Assigned(FProperties) then
-    Result+= ', "properties": ' + FProperties.FormatJSON(AsCompressedJSON);
-  Result+= '}';
 end;
 
 constructor TGeoJSONFeature.Create;

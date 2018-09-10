@@ -111,10 +111,18 @@ begin
 end;
 
 function TGeoJSONPoint.GetJSON: String;
+var
+  jPoint: TJSONObject;
 begin
-  Result:= '{"type": "Point", "coordinates": ';
-  Result+= FCoordinates.asJSON;
-  Result+= '}';
+  Result:= '';
+  jPoint:= TJSONObject.Create;
+  try
+    jPoint.Add('type', TJSONString.Create('Point'));
+    jPoint.Add('coordinates', GetJSONData(FCoordinates.asJSON).Clone);
+    Result:= jPoint.FormatJSON(AsCompressedJSON);
+  finally
+    jPoint.Free;
+  end;
 end;
 
 constructor TGeoJSONPoint.Create;

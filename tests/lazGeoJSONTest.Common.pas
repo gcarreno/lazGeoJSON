@@ -44,43 +44,43 @@ const
   cJSONPositionArrayOneItemI =
     '[100]';
   cJSONPositionArrayTwoItemsI =
-    '[100, -100]';
+    '[100,-100]';
   cJSONPositionArrayThreeItemsI =
-    '[100, -100, 100]';
+    '[100,-100,100]';
   cJSONPositionArrayFourItemsI =
-    '[100, -100, 100, 100]';
+    '[100,-100,100,100]';
   cJSONPositionArrayOneItemD =
     '[100.12]';
   cJSONPositionArrayTwoItemsD =
-    '[100.12, -100.12]';
+    '[100.12,-100.12]';
   cJSONPositionArrayThreeItemsD =
-    '[100.12, -100.12, 100.12]';
+    '[100.12,-100.12,100.12]';
   cJSONPositionArrayFourItemsD =
-    '[100.12, -100.12, 100.12, 100.12]';
+    '[100.12,-100.12,100.12,100.12]';
 
 // TGeoJSONPoint
   cJSONPointObjectNoPosition =
-    '{"type": "Point"}';
+    '{"type":"Point"}';
   cJSONPointObject =
-    '{"type": "Point", "coordinates": [100, -100]}';
+    '{"type":"Point","coordinates":[100,-100]}';
 
 // TGeoJSONMultiPoint
   cJSONMultiPointObjectNoPosition =
-    '{"type": "MultiPoint"}';
+    '{"type":"MultiPoint"}';
   cJSONMultiPointObjectOnePoint =
-    '{"type": "MultiPoint", "coordinates": [[100, -100]]}';
+    '{"type":"MultiPoint","coordinates":[[100,-100]]}';
   cJSONMultiPointObjectTwoPoints =
-    '{"type": "MultiPoint", "coordinates": [[100, -100], [101, -101]]}';
+    '{"type":"MultiPoint","coordinates":[[100,-100],[101, -101]]}';
 
 // TGeoJSONFeature
   cJSONFeatureNoGeometry =
-    '{"type": "Feature"}';
+    '{"type":"Feature"}';
   cJSONFeature =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}}';
+    '{"type":"Feature","geometry":{"type":"Point","coordinates":[100,-100]}}';
   cJSONFeatureIDProperties =
-    '{"type": "Feature", "id": "Feature001", "geometry": {"type": "Point", "coordinates": [100, -100]}, "properties": {"p1":"p1 value","p2":"p2 value"}}';
+    '{"type":"Feature","id":"Feature001","geometry":{"type":"Point","coordinates":[100,-100]},"properties":{"p1":"p1 value","p2":"p2 value"}}';
   cJSONFeatureProperties =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}, "properties": {"p1":"p1 value","p2":"p2 value"}}';
+    '{"type":"Feature","geometry":{"type":"Point","coordinates":[100,-100]},"properties":{"p1":"p1 value","p2":"p2 value"}}';
   cJSONFeatureStationML =
     '{'+
     '    "type": "Feature",'+
@@ -100,7 +100,7 @@ const
     '    }'+
     '}';
   cJSONFeatureStation =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [-2.883333, 54.066666]}, "properties": {"Id":"0440B","Name":"Morecambe","Country":"England","ContinuousHeightsAvailable":true,"Footnote":null}}';
+    '{"type":"Feature","geometry":{"type":"Point","coordinates":[-2.883333,54.066666]},"properties":{"Id":"0440B","Name":"Morecambe","Country":"England","ContinuousHeightsAvailable":true,"Footnote":null}}';
 
 implementation
 

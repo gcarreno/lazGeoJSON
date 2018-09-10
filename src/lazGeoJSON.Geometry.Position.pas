@@ -149,10 +149,10 @@ end;
 function TGeoJSONPosition.GetJSON: String;
 begin
   Result:= '[';
-  Result+= FloatToStr(FValues[0]) + ', ';
+  Result+= FloatToStr(FValues[0]) + ',';
   Result+= FloatToStr(FValues[1]);
   if FHasAltitude then
-    Result+= ', '+FloatToStr(FValues[2]);
+    Result+= ','+FloatToStr(FValues[2]);
   Result+= ']';
 end;
 
