@@ -44,6 +44,7 @@ type
     FPoint: TGeoJSONPoint;
     FProperties: TJSONData;
     FHasProperties: Boolean;
+    { TODO -ogcarreno -cGeoJSON.Feature : Implement the ID field }
 
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
@@ -131,7 +132,7 @@ end;
 
 constructor TGeoJSONFeature.Create;
 begin
-  FGJType:= gjtFeature;
+  FGeoJSONType:= gjtFeature;
   FPoint:= TGeoJSONPoint.Create;
   FProperties:= nil;
   FHasProperties:= False;
@@ -139,25 +140,25 @@ end;
 
 constructor TGeoJSONFeature.Create(const aJSON: String);
 begin
-  FGJType:= gjtFeature;
+  FGeoJSONType:= gjtFeature;
   DoLoadFromJSON(aJSON);
 end;
 
 constructor TGeoJSONFeature.Create(const aJSONData: TJSONData);
 begin
-  FGJType:= gjtFeature;
+  FGeoJSONType:= gjtFeature;
   DoLoadFromJSONData(aJSONData);
 end;
 
 constructor TGeoJSONFeature.Create(const aJSONObject: TJSONObject);
 begin
-  FGJType:= gjtFeature;
+  FGeoJSONType:= gjtFeature;
   DoLoadFromJSONObject(aJSONObject);
 end;
 
 constructor TGeoJSONFeature.Create(const aStream: TStream);
 begin
-  FGJType:= gjtFeature;
+  FGeoJSONType:= gjtFeature;
   DoLoadFromStream(aStream);
 end;
 

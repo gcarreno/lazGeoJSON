@@ -75,7 +75,7 @@ uses
 procedure TTestGeoJSONPoint.TestPointCreate;
 begin
   FGeoJSONPoint:= TGeoJSONPoint.Create;
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
+  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GeoJSONType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
 end;
 
@@ -220,7 +220,7 @@ var
 begin
   jData:= GetJSONData(cJSONPointObject);
   FGeoJSONPoint:= TGeoJSONPoint.Create(jData as TJSONObject);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
+  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GeoJSONType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
   jdata.Free;
 end;
@@ -300,7 +300,7 @@ var
 begin
   s:= TStringStream.Create(cJSONPointObject);
   FGeoJSONPoint:= TGeoJSONPoint.Create(s);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
+  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GeoJSONType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
   s.Free;
 end;
@@ -348,7 +348,7 @@ end;
 procedure TTestGeoJSONPoint.TestPointCreateJSON;
 begin
   FGeoJSONPoint:= TGeoJSONPoint.Create(cJSONPointObject);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
+  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GeoJSONType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
 end;
 
@@ -358,7 +358,7 @@ var
 begin
   jData:= GetJSONData(cJSONPointObject);
   FGeoJSONPoint:= TGeoJSONPoint.Create(jData);
-  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GJType), Ord(gjtPoint));
+  AssertEquals('GeoJSON Object type gjtPoint', Ord(FGeoJSONPoint.GeoJSONType), Ord(gjtPoint));
   FGeoJSONPoint.Free;
   jdata.Free;
 end;

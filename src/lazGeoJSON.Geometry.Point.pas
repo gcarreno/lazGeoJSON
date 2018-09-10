@@ -119,31 +119,31 @@ end;
 
 constructor TGeoJSONPoint.Create;
 begin
-  FGJType:= gjtPoint;
+  FGeoJSONType:= gjtPoint;
   FCoordinates:= TGeoJSONPosition.Create;
 end;
 
 constructor TGeoJSONPoint.Create(const aJSON: String);
 begin
-  FGJType:= gjtPoint;
+  FGeoJSONType:= gjtPoint;
   DoLoadFromJSON(aJSON);
 end;
 
 constructor TGeoJSONPoint.Create(const aJSONData: TJSONData);
 begin
-  FGJType:= gjtPoint;
+  FGeoJSONType:= gjtPoint;
   DoLoadFromJSONData(aJSONData);
 end;
 
 constructor TGeoJSONPoint.Create(const aJSONObject: TJSONObject);
 begin
-  FGJType:= gjtPoint;
+  FGeoJSONType:= gjtPoint;
   DoLoadFromJSONObject(aJSONObject);
 end;
 
 constructor TGeoJSONPoint.Create(const aStream: TStream);
 begin
-  FGJType:= gjtPoint;
+  FGeoJSONType:= gjtPoint;
   DoLoadFromStream(aStream);
 end;
 

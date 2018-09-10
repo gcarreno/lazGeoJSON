@@ -49,7 +49,7 @@ implementation
 procedure TTestGeoJSON.TestGeoJSONCreate;
 begin
   FGeoJSON:= TGeoJSON.Create;
-  AssertEquals('GeoJSON Object type gjtNone', Ord(FGeoJSON.GJType), Ord(gjtNone));
+  AssertEquals('GeoJSON Object type gjtNone', Ord(FGeoJSON.GeoJSONType), Ord(gjtNone));
   FGeoJSON.Free;
 end;
 

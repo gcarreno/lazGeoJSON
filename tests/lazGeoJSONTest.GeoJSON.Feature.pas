@@ -65,7 +65,7 @@ uses
 procedure TTestGeoJSONFeature.TestFeatureCreate;
 begin
   FGeoJSONFeature:= TGeoJSONFeature.Create;
-  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GJType));
+  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
   AssertEquals('GeoJSON Object HasProperties False', False, FGeoJSONFeature.HasProperties);
   FGeoJSONFeature.Free;
 end;
@@ -133,7 +133,7 @@ end;
 procedure TTestGeoJSONFeature.TestFeatureCreateJSON;
 begin
   FGeoJSONFeature:= TGeoJSONFeature.Create(cJSONFeature);
-  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GJType));
+  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
   AssertEquals('GeoJSON Object HasProperties False', False, FGeoJSONFeature.HasProperties);
   WriteLn('Feature.asJSON: ', FGeoJSONFeature.asJSON);
   FGeoJSONFeature.Free;
@@ -142,7 +142,7 @@ end;
 procedure TTestGeoJSONFeature.TestFeatureCreateJSONWithProperties;
 begin
   FGeoJSONFeature:= TGeoJSONFeature.Create(cJSONFeatureProperties);
-  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GJType));
+  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
   AssertEquals('GeoJSON Object HasProperties True', True, FGeoJSONFeature.HasProperties);
   FGeoJSONFeature.Free;
 end;

@@ -40,14 +40,13 @@ type
   TGeoJSON = class (TObject)
   private
   protected
-    FGJType: TGeoJSONType;
+    FGeoJSONType: TGeoJSONType;
     { TODO -ogcarreno -cGeoJSON : Implement the bbox member }
   public
     constructor Create;
 
-    property GJType: TGeoJSONType
-      read FGJType
-      write FGJType;
+    property GeoJSONType: TGeoJSONType
+      read FGeoJSONType;
   end;
 
 implementation
@@ -55,7 +54,7 @@ implementation
 { TGeoJSON }
 constructor TGeoJSON.Create;
 begin
-  FGJType:= gjtNone;
+  FGeoJSONType:= gjtNone;
 end;
 
 end.
