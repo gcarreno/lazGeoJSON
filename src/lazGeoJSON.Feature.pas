@@ -42,8 +42,7 @@ type
   TGeoJSONFeature = class(TGeoJSON)
   private
     FID: String;
-    { TODO 2 -ogcarreno -cGeoJSON.Feature : Feature can contain any of: Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon. }
-    FPoint: TGeoJSONPoint;
+    FGeometry: TGeoJSON;
     FProperties: TJSONData;
     FHasProperties: Boolean;
 
@@ -67,8 +66,8 @@ type
       write FID;
     property HasID: Boolean
       read GetHasID;
-    property Point: TGeoJSONPoint
-      read FPoint;
+    property Geometry: TGeoJSON
+      read FGeometry;
     property Properties: TJSONData
       read FProperties;
     property HasProperties: Boolean
@@ -112,7 +111,13 @@ begin
   begin
     FID:= aJSONObject.Strings['id'];
   end;
-  FPoint:= TGeoJSONPoint.Create(aJSONObject.Objects['geometry']);
+  { Go through all the Geometries }
+  { TODO -ogcarreno -cGeoJSON.Feature : Need a safer way to test for the Geometry type }
+  if aJSONObject.Objects['geometry'].Strings['type'] = 'Point' then
+    FGeometry:= TGeoJSONPoint.Create(aJSONObject.Objects['geometry']);
+  //if aJSONObject.Objects['geometry'].Strings['type'] = 'MultiPoint' then
+  //  FGeometry:= TGeoJSONMultiPoint.Create(aJSONObject.Objects['geometry']);
+  { END Goemetries }
   if aJSONObject.IndexOfName('properties') <> -1 then
   begin
     if aJSONObject.Items[aJSONObject.IndexOfName('properties')].JSONType = jtObject then
@@ -142,7 +147,14 @@ begin
   Result:= '{"type": "Feature"';
   if FID <> '' then
     Result+= ', "id": "'+FID+'"';
-  Result+= ', "geometry": ' + FPoint.asJSON;
+  case FGeometry.GeoJSONType of
+    gjtPoint: begin
+      Result+= ', "geometry": ' + TGeoJSONPoint(FGeometry).asJSON;
+    end;
+    //gjtMultiPoint: begin
+    //  Result+= ', "geometry": ' + TGeoJSONMultiPoint(FGeometry).asJSON;
+    //end;
+  end;
   if Assigned(FProperties) then
     Result+= ', "properties": ' + FProperties.FormatJSON(AsCompressedJSON);
   Result+= '}';
@@ -152,39 +164,42 @@ constructor TGeoJSONFeature.Create;
 begin
   FGeoJSONType:= gjtFeature;
   FID:= '';
-  FPoint:= TGeoJSONPoint.Create;
+  FGeometry:= nil;
   FProperties:= nil;
   FHasProperties:= False;
 end;
 
 constructor TGeoJSONFeature.Create(const aJSON: String);
 begin
-  FGeoJSONType:= gjtFeature;
+  Create;
   DoLoadFromJSON(aJSON);
 end;
 
 constructor TGeoJSONFeature.Create(const aJSONData: TJSONData);
 begin
-  FGeoJSONType:= gjtFeature;
+  Create;
   DoLoadFromJSONData(aJSONData);
 end;
 
 constructor TGeoJSONFeature.Create(const aJSONObject: TJSONObject);
 begin
-  FGeoJSONType:= gjtFeature;
+  Create;
   DoLoadFromJSONObject(aJSONObject);
 end;
 
 constructor TGeoJSONFeature.Create(const aStream: TStream);
 begin
-  FGeoJSONType:= gjtFeature;
+  Create;
   DoLoadFromStream(aStream);
 end;
 
 destructor TGeoJSONFeature.Destroy;
 begin
-  if Assigned(FPoint) then
-    FPoint.Free;
+  if Assigned(FGeometry) then
+    case FGeometry.GeoJSONType of
+      gjtPoint: TGeoJSONPoint(FGeometry).Free;
+      //gjtMultiPoint: TGeoJSONMultiPoint(FGeometry).Free;
+    end;
   if Assigned(FProperties) then
     FProperties.Free;
   inherited Destroy;

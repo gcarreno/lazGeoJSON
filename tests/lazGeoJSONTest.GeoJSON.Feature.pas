@@ -71,6 +71,7 @@ begin
   AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
   AssertEquals('Feature HasID False', False, FGeoJSONFeature.HasID);
   AssertEquals('Feature ID empty', '', FGeoJSONFeature.ID);
+  AssertNull('Feature Geometry nil', FGeoJSONFeature.Geometry);
   AssertEquals('Feature HasProperties False', False, FGeoJSONFeature.HasProperties);
   FGeoJSONFeature.Free;
 end;
@@ -141,6 +142,7 @@ begin
   AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
   AssertEquals('Feature HasID False', False, FGeoJSONFeature.HasID);
   AssertEquals('Feature ID empty', '', FGeoJSONFeature.ID);
+  AssertNotNull('Feature Geometry not nil', FGeoJSONFeature.Geometry);
   AssertEquals('Feature HasProperties False', False, FGeoJSONFeature.HasProperties);
   FGeoJSONFeature.Free;
 end;
@@ -151,6 +153,7 @@ begin
   AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
   AssertEquals('Feature HasID False', False, FGeoJSONFeature.HasID);
   AssertEquals('Feature ID empty', '', FGeoJSONFeature.ID);
+  AssertNotNull('Feature Geometry not nil', FGeoJSONFeature.Geometry);
   AssertEquals('Feature HasProperties True', True, FGeoJSONFeature.HasProperties);
   FGeoJSONFeature.Free;
 end;
@@ -161,6 +164,7 @@ begin
   AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
   AssertEquals('Feature HasID True', True, FGeoJSONFeature.HasID);
   AssertEquals('Feature ID Feature001', 'Feature001', FGeoJSONFeature.ID);
+  AssertNotNull('Feature Geometry not nil', FGeoJSONFeature.Geometry);
   AssertEquals('Feature HasProperties True', True, FGeoJSONFeature.HasProperties);
   FGeoJSONFeature.Free;
 end;
