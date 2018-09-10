@@ -158,12 +158,12 @@ end;
 
 function TGeoJSONPosition.GetLatitude: Double;
 begin
-  Result:= FValues[0];
+  Result:= FValues[1];
 end;
 
 function TGeoJSONPosition.GetLongitude: Double;
 begin
-  Result:= FValues[1];
+  Result:= FValues[0];
 end;
 
 procedure TGeoJSONPosition.SetAltitude(AValue: Double);
@@ -193,14 +193,14 @@ end;
 
 procedure TGeoJSONPosition.SetLatitude(AValue: Double);
 begin
-  if FValues[0] = AValue then exit;
-  FValues[0]:= AValue;
+  if FValues[1] = AValue then exit;
+  FValues[1]:= AValue;
 end;
 
 procedure TGeoJSONPosition.SetLongitude(AValue: Double);
 begin
-  if FValues[1] = AValue then exit;
-  FValues[1]:= AValue;
+  if FValues[0] = AValue then exit;
+  FValues[0]:= AValue;
 end;
 
 constructor TGeoJSONPosition.Create;

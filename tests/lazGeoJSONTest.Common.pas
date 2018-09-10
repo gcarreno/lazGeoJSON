@@ -33,11 +33,11 @@ const
   cJSONEmptyArray =             '[]';
 
 // Float and Integer Constants
-  cLatitudeI = 100;
-  cLongitudeI = -100;
+  cLongitudeI = 100;
+  cLatitudeI = -100;
   cAltitudeI = 100;
-  cLatitudeD = 100.12;
-  cLongitudeD = -100.12;
+  cLongitudeD = 100.12;
+  cLatitudeD = -100.12;
   cAltitudeD = 100.12;
 
 // TGeoJSONPosition
