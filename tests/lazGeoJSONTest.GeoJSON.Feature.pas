@@ -52,6 +52,11 @@ type
     procedure TestFeatureCreateJSONWithIDProperties;
 
     procedure TestFeatureCreateJSONDataWrongObject;
+    procedure TestFeatureCreateJSONDataWrongFormedObjectWithEmptyObject;
+    procedure TestFeatureCreateJSONDataWrongFormedObjectWithMissingMember;
+    procedure TestFeatureCreateJSONData;
+    procedure TestFeatureCreateJSONDataWithProperties;
+    procedure TestFeatureCreateJSONDataWithIDProperties;
 
     procedure TestFeatureAsJSON;
     procedure TestFeatureAsJSONWithProperties;
@@ -172,13 +177,11 @@ end;
 procedure TTestGeoJSONFeature.TestFeatureCreateJSONDataWrongObject;
 var
   gotException: Boolean;
-  jData: TJSONData;
 begin
   gotException:= False;
-  jData:= GetJSONData(cJSONEmptyArray);
   try
     try
-      FGeoJSONFeature:= TGeoJSONFeature.Create(jData);
+      FGeoJSONFeature:= TGeoJSONFeature.Create(GetJSONData(cJSONEmptyArray));
     except
       on e: EFeatureWrongObject do
       begin
@@ -188,8 +191,80 @@ begin
   finally
     FGeoJSONFeature.Free;
   end;
-  jData.Free;
   AssertEquals('Got Exception EFeatureWrongObject on empty array', True, gotException);
+end;
+
+procedure TTestGeoJSONFeature.TestFeatureCreateJSONDataWrongFormedObjectWithEmptyObject;
+var
+  gotException: Boolean;
+begin
+  gotException:= False;
+  try
+    try
+      FGeoJSONFeature:= TGeoJSONFeature.Create(GetJSONData(cJSONEmptyObject));
+    except
+      on e: EFeatureWrongFormedObject do
+      begin
+        gotException:= True;
+      end;
+    end;
+  finally
+    FGeoJSONFeature.Free;
+  end;
+  AssertEquals('Got Exception EFeatureWrongFormedObject on empty object', True, gotException);
+end;
+
+procedure TTestGeoJSONFeature.TestFeatureCreateJSONDataWrongFormedObjectWithMissingMember;
+var
+  gotException: Boolean;
+begin
+  gotException:= False;
+  try
+    try
+      FGeoJSONFeature:= TGeoJSONFeature.Create(GetJSONData(cJSONFeatureNoGeometry));
+    except
+      on e: EFeatureWrongFormedObject do
+      begin
+        gotException:= True;
+      end;
+    end;
+  finally
+    FGeoJSONFeature.Free;
+  end;
+  AssertEquals('Got Exception EPointWrongFormedObject on object missing member', True, gotException);
+end;
+
+procedure TTestGeoJSONFeature.TestFeatureCreateJSONData;
+begin
+  FGeoJSONFeature:= TGeoJSONFeature.Create(GetJSONData(cJSONFeature));
+  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
+  AssertEquals('Feature HasID False', False, FGeoJSONFeature.HasID);
+  AssertEquals('Feature ID empty', '', FGeoJSONFeature.ID);
+  AssertNotNull('Feature Geometry not nil', FGeoJSONFeature.Geometry);
+  AssertEquals('Feature HasProperties False', False, FGeoJSONFeature.HasProperties);
+  FGeoJSONFeature.Free;
+end;
+
+procedure TTestGeoJSONFeature.TestFeatureCreateJSONDataWithProperties;
+begin
+  FGeoJSONFeature:= TGeoJSONFeature.Create(GetJSONData(cJSONFeatureProperties));
+  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
+  AssertEquals('Feature HasID False', False, FGeoJSONFeature.HasID);
+  AssertEquals('Feature ID empty', '', FGeoJSONFeature.ID);
+  AssertNotNull('Feature Geometry not nil', FGeoJSONFeature.Geometry);
+  AssertEquals('Feature HasProperties True', True, FGeoJSONFeature.HasProperties);
+  FGeoJSONFeature.Free;
+end;
+
+procedure TTestGeoJSONFeature.TestFeatureCreateJSONDataWithIDProperties;
+begin
+  FGeoJSONFeature:= TGeoJSONFeature.Create(GetJSONData(cJSONFeatureIDProperties));
+  AssertEquals('GeoJSON Object Type gjtFeature', Ord(gjtFeature), Ord(FGeoJSONFeature.GeoJSONType));
+  AssertEquals('Feature HasID True', True, FGeoJSONFeature.HasID);
+  AssertEquals('Feature ID Feature001', 'Feature001', FGeoJSONFeature.ID);
+  AssertNotNull('Feature Geometry not nil', FGeoJSONFeature.Geometry);
+  AssertEquals('Feature HasProperties True', True, FGeoJSONFeature.HasProperties);
+  FGeoJSONFeature.Free;
 end;
 
 procedure TTestGeoJSONFeature.TestFeatureAsJSON;
