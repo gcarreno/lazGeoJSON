@@ -68,6 +68,7 @@ type
     constructor Create(const aJSONData: TJSONData);
     constructor Create(const aJSONArray: TJSONArray);
     constructor Create(const aStream: TStream);
+    destructor Destroy; override;
 
     property Longitude: Double
       read GetLongitude
@@ -232,6 +233,12 @@ constructor TGeoJSONPosition.Create(const aStream: TStream);
 begin
   Create;
   DoLoadFromStream(aStream);
+end;
+
+destructor TGeoJSONPosition.Destroy;
+begin
+  SetLength(FValues, 0);
+  inherited Destroy;
 end;
 
 end.
