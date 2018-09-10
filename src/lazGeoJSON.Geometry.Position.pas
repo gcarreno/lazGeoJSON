@@ -34,21 +34,32 @@ uses
 type
 { Exceptions }
   // Position
+  EPositionNoAltitude = class(Exception);
   EPositionWrongJSONObject = class(Exception);
   EPositionNotEnoughItems = class(Exception);
 
 { TGeoJSONPosition }
   TGeoJSONPosition = class(TObject)
   private
-    FLongitude: Double;
-    FLatitude: Double;
-    FAltitude: Double;
+    FValues: Array of Double;
     FHasAltitude: Boolean;
 
     procedure DoLoadFromJSON(const aJSON: String);
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONArray(const aJSONArray: TJSONArray);
     procedure DoLoadFromStream(const AStream: TStream);
+
+    function GetLatitude: Double;
+    procedure SetLatitude(AValue: Double);
+
+    function GetLongitude: Double;
+    procedure SetLongitude(AValue: Double);
+
+    function GetAltitude: Double;
+    procedure SetAltitude(AValue: Double);
+
+    procedure SetHasAltitude(AValue: Boolean);
+
     function GetJSON: String;
   protected
   public
@@ -59,16 +70,17 @@ type
     constructor Create(const aStream: TStream);
 
     property Longitude: Double
-      read FLongitude
-      write FLongitude;
+      read GetLongitude
+      write SetLongitude;
     property Latitude: Double
-      read FLatitude
-      write FLatitude;
+      read GetLatitude
+      write SetLatitude;
     property Altitude: Double
-      read FAltitude
-      write FAltitude;
+      read GetAltitude
+      write SetAltitude;
     property HasAltitude: Boolean
-      read FHasAltitude;
+      read FHasAltitude
+      write SetHasAltitude;
     property asJSON: String
       read GetJSON;
   end;
@@ -100,11 +112,13 @@ procedure TGeoJSONPosition.DoLoadFromJSONArray(const aJSONArray: TJSONArray);
 begin
   if aJSONArray.Count < 2 then
     raise EPositionNotEnoughItems.CreateFmt('Not enough items (need 2 min): "%s".', [aJSONArray.AsJSON]);
-  FLatitude:= aJSONArray.Floats[0];
-  FLongitude:= aJSONArray.Floats[1];
+  FValues[0]:= aJSONArray.Floats[0];
+  FValues[1]:= aJSONArray.Floats[1];
   if aJSONArray.Count > 2 then
   begin
-    FAltitude:= aJSONArray.Floats[2];
+    if Length(FValues) < 3 then
+      SetLength(FValues, 3);
+    FValues[2]:= aJSONArray.Floats[2];
     FHasAltitude:= True;
   end;
 end;
@@ -121,21 +135,78 @@ begin
   end;
 end;
 
+function TGeoJSONPosition.GetAltitude: Double;
+begin
+  if FHasAltitude then
+  begin
+    Result:= FValues[2];
+  end
+  else
+    raise EPositionNoAltitude.Create('Object does not contain Altitude');
+end;
+
 function TGeoJSONPosition.GetJSON: String;
 begin
   Result:= '[';
-  Result+= FloatToStr(FLatitude) + ', ';
-  Result+= FloatToStr(FLongitude);
+  Result+= FloatToStr(FValues[0]) + ', ';
+  Result+= FloatToStr(FValues[1]);
   if FHasAltitude then
-    Result+= ', '+FloatToStr(FAltitude);
+    Result+= ', '+FloatToStr(FValues[2]);
   Result+= ']';
+end;
+
+function TGeoJSONPosition.GetLatitude: Double;
+begin
+  Result:= FValues[0];
+end;
+
+function TGeoJSONPosition.GetLongitude: Double;
+begin
+  Result:= FValues[1];
+end;
+
+procedure TGeoJSONPosition.SetAltitude(AValue: Double);
+begin
+  if not FHasAltitude then
+  begin
+    SetLength(FValues, 3);
+    FHasAltitude:= True;
+  end;
+  FValues[2]:= AValue;
+end;
+
+procedure TGeoJSONPosition.SetHasAltitude(AValue: Boolean);
+begin
+  if FHasAltitude = AValue then Exit;
+  FHasAltitude:= AValue;
+  case FHasAltitude of
+    True:begin
+      SetLength(FValues, 3);
+      FValues[2]:= 0.0;
+    end;
+    False:begin
+      SetLength(FValues, 2);
+    end;
+  end;
+end;
+
+procedure TGeoJSONPosition.SetLatitude(AValue: Double);
+begin
+  if FValues[0] = AValue then exit;
+  FValues[0]:= AValue;
+end;
+
+procedure TGeoJSONPosition.SetLongitude(AValue: Double);
+begin
+  if FValues[1] = AValue then exit;
+  FValues[1]:= AValue;
 end;
 
 constructor TGeoJSONPosition.Create;
 begin
-  FLongitude:= 0.0;
-  FLatitude:= 0.0;
-  FAltitude:= 0.0;
+  SetLength(FValues, 2);
+  FValues[0]:= 0.0;
+  FValues[1]:= 0.0;
   FHasAltitude:= False;
 end;
 
