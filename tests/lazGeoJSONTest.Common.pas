@@ -64,13 +64,23 @@ const
   cJSONPointObject =
     '{"type": "Point", "coordinates": [100, -100]}';
 
+// TGeoJSONMultiPoint
+  cJSONMultiPointObjectNoPosition =
+    '{"type": "MultiPoint"}';
+  cJSONMultiPointObjectOnePoint =
+    '{"type": "MultiPoint", "coordinates": [[100, -100]]}';
+  cJSONMultiPointObjectTwoPoints =
+    '{"type": "MultiPoint", "coordinates": [[100, -100], [101, -101]]}';
+
 // TGeoJSONFeature
   cJSONFeatureNoGeometry =
     '{"type": "Feature"}';
-  cJSONFeatureProperties =
-    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}, "properties": {"p1":"p1 value","p2":"p2 value"}}';
   cJSONFeature =
     '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}}';
+  cJSONFeatureIDProperties =
+    '{"type": "Feature", "id": "Feature001", "geometry": {"type": "Point", "coordinates": [100, -100]}, "properties": {"p1":"p1 value","p2":"p2 value"}}';
+  cJSONFeatureProperties =
+    '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [100, -100]}, "properties": {"p1":"p1 value","p2":"p2 value"}}';
   cJSONFeatureStationML =
     '{'+
     '    "type": "Feature",'+

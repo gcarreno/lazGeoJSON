@@ -41,7 +41,7 @@ type
   private
   protected
     FGeoJSONType: TGeoJSONType;
-    { TODO -ogcarreno -cGeoJSON : Implement the bbox member }
+    { TODO 10 -ogcarreno -cGeoJSON : Implement the bbox member }
   public
     constructor Create;
 

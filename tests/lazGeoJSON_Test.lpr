@@ -30,6 +30,7 @@ uses
   lazGeoJSONTest.GeoJSON,
   lazGeoJSONTest.GeoJSON.Geometry.Position,
   lazGeoJSONTest.GeoJSON.Geometry.Point,
+  //lazGeoJSONTest.GeoJSON.Geometry.MultiPoint,
   lazGeoJSONTest.GeoJSON.Feature;
 
 type
