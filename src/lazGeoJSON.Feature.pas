@@ -51,6 +51,7 @@ type
     procedure DoLoadFromJSONData(const aJSONData: TJSONData);
     procedure DoLoadFromJSONObject(const aJSONObject: TJSONObject);
     procedure DoLoadFromStream(const aStream: TStream);
+    function GetHasID: Boolean;
     function GetJSON: String;
   protected
   public
@@ -64,6 +65,8 @@ type
     property ID: String
       read FID
       write FID;
+    property HasID: Boolean
+      read GetHasID;
     property Point: TGeoJSONPoint
       read FPoint;
     property Properties: TJSONData
@@ -127,6 +130,11 @@ begin
   jData:= GetJSONData(aStream);
   DoLoadFromJSONData(jData);
   jData.Free;
+end;
+
+function TGeoJSONFeature.GetHasID: Boolean;
+begin
+  Result:= FID <> '';
 end;
 
 function TGeoJSONFeature.GetJSON: String;
