@@ -72,7 +72,7 @@ def install_lazarus_version(ver,rel,env):
 
     if osn == 'wine':
         # Install wine and Xvfb
-        if os.system('sudo dpkg --add-architecture i386 && %s update && %s install xvfb wine' % (OS_PMAN, OS_PMAN)) != 0:
+        if os.system('sudo dpkg --add-architecture i386 && %s update && %s install xvfb wine-stable' % (OS_PMAN, OS_PMAN)) != 0:
             return False
 
         # Initialize virtual display and wine directory
@@ -134,7 +134,7 @@ def install_lazarus_version(ver,rel,env):
         # Compile ARM cross compiler
         if os.system('cd /usr/share/fpcsrc/%s && sudo make clean crossall crossinstall %s' % (fpcv, opts)) != 0:
             return False
-        
+
         # Symbolic link to update default FPC cross compiler for ARM
         if os.system('sudo ln -sf /usr/lib/fpc/%s/ppcrossarm /usr/bin/ppcarm' % (fpcv)) != 0:
             return False
