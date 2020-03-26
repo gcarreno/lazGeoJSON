@@ -72,7 +72,7 @@ def install_lazarus_version(ver,rel,env):
 
     if osn == 'wine':
         # Install wine and Xvfb
-        if os.system('sudo dpkg --add-architecture i386 && %s update && %s install xvfb wine32' % (OS_PMAN, OS_PMAN)) != 0:
+        if os.system('sudo dpkg --add-architecture i386 && %s update && %s install xvfb wine' % (OS_PMAN, OS_PMAN)) != 0:
             return False
 
         # Initialize virtual display and wine directory

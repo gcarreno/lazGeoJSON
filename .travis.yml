@@ -1,8 +1,8 @@
 # Part of `travis-lazarus` (https://github.com/nielsAD/travis-lazarus)
 # License: MIT
 
-language: pascal
-dist: bionic
+language: generic
+dist: trusty
 
 os:
   - linux
