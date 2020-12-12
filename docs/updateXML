@@ -20,8 +20,8 @@ FILES=(
 
 for file in "${FILES[@]}"; do
   echo "Doing: ${SRC}/${file}.pas"
-  $MAKESKEL $FLAGS --package=${PACKAGE} \
-                   --descr=${XML}/${file,,}.xml \
-                   --input=${SRC}/${file}.pas \
-                   --output=${OUT}/${file,,}.xml
+  ${MAKESKEL} ${FLAGS} --package=${PACKAGE} \
+                       --descr=${XML}/${file,,}.xml \
+                       --input=${SRC}/${file}.pas \
+                       --output=${OUT}/${file,,}.xml
 done

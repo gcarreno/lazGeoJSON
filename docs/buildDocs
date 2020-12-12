@@ -1,17 +1,26 @@
 #!/bin/bash
-/home/gcarreno/FreePascal/fpc/bin/x86_64-linux/fpdoc \
-    --package=lazGeoJSON \
-    --output=/home/gcarreno/Programming/lazGeoJSON/docs/html \
+
+FPDOC=~/FreePascal/fpc/bin/x86_64-linux/fpdoc
+
+PACKAGE=lazGeoJSON
+
+OUT=~/Programming/lazGeoJSON/docs/html
+XML=~/Programming/lazGeoJSON/docs/xml
+SRC=~/Programming/lazGeoJSON/src
+
+${FPDOC} \
+    --package=${PACKAGE} \
+    --output=${OUT} \
     --format=html \
-    --descr=/home/gcarreno/Programming/lazGeoJSON/docs/xml/lazgeojson.xml \
-    --descr=/home/gcarreno/Programming/lazGeoJSON/docs/xml/lazgeojson.feature.xml \
-    --descr=/home/gcarreno/Programming/lazGeoJSON/docs/xml/lazgeojson.geometry.multipoint.xml \
-    --descr=/home/gcarreno/Programming/lazGeoJSON/docs/xml/lazgeojson.geometry.point.xml \
-    --descr=/home/gcarreno/Programming/lazGeoJSON/docs/xml/lazgeojson.geometry.position.xml \
-    --descr=/home/gcarreno/Programming/lazGeoJSON/docs/xml/lazgeojson.utils.xml \
-    --input=/home/gcarreno/Programming/lazGeoJSON/src/lazGeoJSON.pas \
-    --input=/home/gcarreno/Programming/lazGeoJSON/src/lazGeoJSON.Feature.pas \
-    --input=/home/gcarreno/Programming/lazGeoJSON/src/lazGeoJSON.Geometry.MultiPoint.pas \
-    --input=/home/gcarreno/Programming/lazGeoJSON/src/lazGeoJSON.Geometry.Point.pas \
-    --input=/home/gcarreno/Programming/lazGeoJSON/src/lazGeoJSON.Geometry.Position.pas \
-    --input=/home/gcarreno/Programming/lazGeoJSON/src/lazGeoJSON.Utils.pas \
+    --descr=${XML}/lazgeojson.xml \
+    --descr=${XML}/lazgeojson.feature.xml \
+    --descr=${XML}/lazgeojson.geometry.multipoint.xml \
+    --descr=${XML}/lazgeojson.geometry.point.xml \
+    --descr=${XML}/lazgeojson.geometry.position.xml \
+    --descr=${XML}/lazgeojson.utils.xml \
+    --input=${SRC}/lazGeoJSON.pas \
+    --input=${SRC}/lazGeoJSON.Feature.pas \
+    --input=${SRC}/lazGeoJSON.Geometry.MultiPoint.pas \
+    --input=${SRC}/lazGeoJSON.Geometry.Point.pas \
+    --input=${SRC}/lazGeoJSON.Geometry.Position.pas \
+    --input=${SRC}/lazGeoJSON.Utils.pas \
