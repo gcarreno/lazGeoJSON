@@ -1,0 +1,27 @@
+#!/bin/bash
+
+MAKESKEL=~/FreePascal/fpc/bin/x86_64-linux/makeskel
+FLAGS="--disable-private --disable-protected --update"
+
+PACKAGE=lazGeoJSON
+
+XML=~/Programming/lazGeoJSON/docs/xml
+SRC=~/Programming/lazGeoJSON/src
+OUT=~/Programming/lazGeoJSON
+
+FILES=(
+    "lazGeoJSON"
+    "lazGeoJSON.Feature"
+    "lazGeoJSON.Geometry.MultiPoint"
+    "lazGeoJSON.Geometry.Point"
+    "lazGeoJSON.Geometry.Position"
+    "lazGeoJSON.Utils"
+)
+
+for file in "${FILES[@]}"; do
+  echo "Doing: ${SRC}/${file}.pas"
+  $MAKESKEL $FLAGS --package=${PACKAGE} \
+                   --descr=${XML}/${file,,}.xml \
+                   --input=${SRC}/${file}.pas \
+                   --output=${OUT}/${file,,}.xml
+done

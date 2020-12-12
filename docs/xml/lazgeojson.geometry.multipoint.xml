@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="lazGeoJSON">
+
+<!--
+  ====================================================================
+    lazGeoJSON.Geometry.MultiPoint
+  ====================================================================
+-->
+
+<module name="lazGeoJSON.Geometry.MultiPoint">
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="fpjson">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON.Utils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON.Geometry.Position">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EMultiPointWrongObject">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EMultiPointWrongFormedObject">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TGeoJSONMultiPoint">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TGeoJSONMultiPoint.Create">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONMultiPoint.Create.aJSON">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONMultiPoint.Create.aJSONData">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONMultiPoint.Create.aJSONObject">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONMultiPoint.Create.aStream">
+<short></short>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TGeoJSONMultiPoint.Destroy">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONMultiPoint.Coordinates">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONMultiPoint.asJSON">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+</module> <!-- lazGeoJSON.Geometry.MultiPoint -->
+
+</package>
+</fpdoc-descriptions>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="lazGeoJSON">
+
+<!--
+  ====================================================================
+    lazGeoJSON.Geometry.Point
+  ====================================================================
+-->
+
+<module name="lazGeoJSON.Geometry.Point">
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="fpjson">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON.Utils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON.Geometry.Position">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EPointWrongObject">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EPointWrongFormedObject">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TGeoJSONPoint">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TGeoJSONPoint.Create">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONPoint.Create.aJSON">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONPoint.Create.aJSONData">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONPoint.Create.aJSONObject">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONPoint.Create.aStream">
+<short></short>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TGeoJSONPoint.Destroy">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONPoint.Coordinates">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONPoint.asJSON">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+</module> <!-- lazGeoJSON.Geometry.Point -->
+
+</package>
+</fpdoc-descriptions>

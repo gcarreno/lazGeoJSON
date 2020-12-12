@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="lazGeoJSON">
+
+<!--
+  ====================================================================
+    lazGeoJSON.Feature
+  ====================================================================
+-->
+
+<module name="lazGeoJSON.Feature">
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="fpjson">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON.Utils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON.Geometry.Point">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EFeatureWrongObject">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EFeatureWrongFormedObject">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TGeoJSONFeature">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TGeoJSONFeature.Create">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONFeature.Create.aJSON">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONFeature.Create.aJSONData">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONFeature.Create.aJSONObject">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONFeature.Create.aStream">
+<short></short>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TGeoJSONFeature.Destroy">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONFeature.ID">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONFeature.HasID">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONFeature.Geometry">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONFeature.Properties">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONFeature.HasProperties">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONFeature.asJSON">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+</module> <!-- lazGeoJSON.Feature -->
+
+</package>
+</fpdoc-descriptions>

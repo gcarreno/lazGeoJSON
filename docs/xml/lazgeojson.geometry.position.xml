@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<fpdoc-descriptions>
+<package name="lazGeoJSON">
+
+<!--
+  ====================================================================
+    lazGeoJSON.Geometry.Position
+  ====================================================================
+-->
+
+<module name="lazGeoJSON.Geometry.Position">
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="fpjson">
+<short></short>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="lazGeoJSON.Utils">
+<short></short>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EPositionNoAltitude">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EPositionWrongJSONObject">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="EPositionNotEnoughItems">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TGeoJSONPosition">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TGeoJSONPosition.Create">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONPosition.Create.aJSON">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONPosition.Create.aJSONData">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONPosition.Create.aJSONArray">
+<short></short>
+</element>
+
+<!-- argument Visibility: default -->
+<element name="TGeoJSONPosition.Create.aStream">
+<short></short>
+</element>
+
+<!-- destructor Visibility: public -->
+<element name="TGeoJSONPosition.Destroy">
+<short></short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONPosition.Longitude">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONPosition.Latitude">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONPosition.Altitude">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONPosition.HasAltitude">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSONPosition.asJSON">
+<short></short>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+</module> <!-- lazGeoJSON.Geometry.Position -->
+
+</package>
+</fpdoc-descriptions>

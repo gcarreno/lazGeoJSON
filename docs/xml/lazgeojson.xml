@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fpdoc-descriptions>
+<package name="lazGeoJSON">
+
+<!--
+  ====================================================================
+    lazGeoJSON
+  ====================================================================
+-->
+
+<module name="lazGeoJSON">
+
+<!-- uses unit Visibility: default -->
+<element name="Classes">
+<short/>
+</element>
+
+<!-- uses unit Visibility: default -->
+<element name="SysUtils">
+<short/>
+</element>
+
+<!-- enumeration type Visibility: default -->
+<element name="TGeoJSONType">
+<short/>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtNone">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtPoint">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtMultiPoint">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtLineString">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtMultiLineString">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtPolygon">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtMultiPolygon">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtGeometryCollection">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtFeature">
+<short/>
+</element>
+
+<!-- enumeration value Visibility: default -->
+<element name="TGeoJSONType.gjtFeatureCollection">
+<short/>
+</element>
+
+<!-- class Visibility: default -->
+<element name="TGeoJSON">
+<short>Base class for Geo JSON elements</short>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- constructor Visibility: public -->
+<element name="TGeoJSON.Create">
+<short/>
+<descr>
+</descr>
+<errors>
+</errors>
+<seealso>
+</seealso>
+</element>
+
+<!-- property Visibility: public -->
+<element name="TGeoJSON.GeoJSONType">
+<short/>
+<descr>
+</descr>
+<seealso>
+</seealso>
+</element>
+
+</module> <!-- lazGeoJSON -->
+
+</package>
+</fpdoc-descriptions>
